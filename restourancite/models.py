@@ -1,67 +1,67 @@
 from django.db import models
 
-
+# Модель столика в ресторане
 class Table(models.Model):
-    number = models.CharField(max_length=10)  # Номер столика
+    number = models.CharField(max_length=10) # Номер столика
     location = models.CharField(
         max_length=100, null=True, blank=True
-    )
+    ) # Расположение столика
 
     def __str__(self):
-        return f"Столик {self.number}"
+        return f"Столик {self.number}" # Чтобы в админке и выводах отображался номер столика
 
-
+# Модель доступного временного слота для столика
 class TableAvailableSlot(models.Model):
     table = models.ForeignKey(
         Table, on_delete=models.CASCADE, related_name="available_slots"
-    )
-    date = models.DateField()
-    time = models.TimeField()
+    ) # Связь с конкретным столиком (при удалении столика удаляются и слоты)
+    date = models.DateField() # Дата доступного слота
+    time = models.TimeField() # Время доступного слота
 
     def __str__(self):
-        return f"{self.table} - {self.date} {self.time}"
+        return f"{self.table} - {self.date} {self.time}" # Отображение в формате: столик - дата время
 
-
+# Модель бронирования столика
 class TableReservation(models.Model):
     table = models.ForeignKey(
         Table, on_delete=models.CASCADE, related_name="reservations"
-    )  # Добавляем выбор столика
-    name = models.CharField(max_length=100)  # Обязательное поле
-    surname = models.CharField(max_length=100)  # Обязательное поле
+    )  # Выбор столика для брони
+    name = models.CharField(max_length=100) # Имя клиента (обязательно)
+    surname = models.CharField(max_length=100) # Фамилия клиента (обязательно)
     patronymic = models.CharField(
         max_length=100, null=True, blank=True
-    )  # Необязательное поле
-    email = models.EmailField(null=True, blank=True)  # Необязательное поле
-    phone = models.CharField(max_length=15)  # Обязательное поле
-    date = models.DateField()  # Обязательное поле
-    time = models.TimeField()  # Обязательное поле
-    guests_number = models.IntegerField()  # Обязательное поле
-    description = models.TextField(null=True, blank=True)  # Необязательное поле
-    agreed_to_policy = models.BooleanField(default=False)  # Обязательное поле
+    ) # Отчество (необязательно)
+    email = models.EmailField(null=True, blank=True) # Email (необязательно)
+    phone = models.CharField(max_length=15) # Телефон (обязательно)
+    date = models.DateField() # Дата брони (обязательно)
+    time = models.TimeField() # Время брони (обязательно)
+    guests_number = models.IntegerField() # Количество гостей (обязательно)
+    description = models.TextField(null=True, blank=True) # Доп. информация (необязательно)
+    agreed_to_policy = models.BooleanField(default=False) # Согласие с политикой (обязательно)
 
     def __str__(self):
-        return f"{self.name} {self.surname} - {self.date} {self.time}"
+        return f"{self.name} {self.surname} - {self.date} {self.time}" # Отображение брони
 
-
+# Модель обращений клиентов (предложения, жалобы, заявления)
 class Tableappeal(models.Model):
     Appeal_type_choises = [
         ("Предложение", "Предложение"),
         ("Заявление", "Заявление"),
         ("Жалоба", "Жалоба"),
-    ]
-    name_surname_patronymic = models.CharField(max_length=200)
-    email = models.CharField(max_length=100)
-    phone = models.CharField(max_length=15, null=True, blank=True)
+    ] # Виды обращений
+    name_surname_patronymic = models.CharField(max_length=200) # Имя и фамилия клиента
+    email = models.CharField(max_length=100) # Email клиента
+    phone = models.CharField(max_length=15, null=True, blank=True) # Телефон (необязательно)
     appeal_type_select = models.CharField(
         max_length=20, choices=Appeal_type_choises, default="Предложение"
-    )
-    appeal_text = models.TextField()
-    agreed_to_policy1 = models.BooleanField(default=False)
+    ) # Тип обращения, выбирается из списка
+    appeal_text = models.TextField() # Текст обращения
+    agreed_to_policy1 = models.BooleanField(default=False) # Согласие с политикой
 
     def __str__(self) -> str:
-        return self.name_surname_patronymic
+        return self.name_surname_patronymic # Отображение имени клиента
 
-
+# Модель напитков в ресторане
 class TableDrink(models.Model):
     drink_type_choises = [
         ("champagne", "Шампанское и игристые вина"),
@@ -69,27 +69,30 @@ class TableDrink(models.Model):
         ("strong_drinks", "Крепкие напитки"),
         ("cocktails", "Коктейли"),
         ("non_alcoholic", "Безалкагольные напитки"),
-    ]
-    name = models.CharField(max_length=100)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    description_drink = models.TextField()
-    structure_drink = models.JSONField()
-    image_drink = models.ImageField(upload_to="drink_images/")
+    ] # Категории напитков
+    name = models.CharField(max_length=100) # Название напитка
+    price = models.DecimalField(max_digits=10, decimal_places=2) # Цена напитка
+    description_drink = models.TextField() # Описание напитка
+    structure_drink = models.JSONField() # Состав напитка (хранится в формате JSON)
+    image_drink = models.ImageField(upload_to="drink_images/") # Фото напитка
     drink_type_select = models.CharField(
         max_length=50, choices=drink_type_choises, default="champange"
-    )
+    ) # Выбор категории напитка
 
     def __str__(self):
-        return self.name
-      
+        return self.name # Отображение названия напитка
+
+# Модель оценки пользователями (например, еды и сервиса)
 class UserRating(models.Model):
     food_rating = models.IntegerField()  # Оценка еды (1-5)
     service_rating = models.IntegerField()  # Оценка обслуживания (1-5)
-    atmosphere_rating = models.IntegerField(default=3)
-    created_at = models.DateTimeField(auto_now_add=True)  # Время оценки
+    atmosphere_rating = models.IntegerField(default=3) # Оценка атмосферы (по умолчанию 3)
+    created_at = models.DateTimeField(auto_now_add=True) # Время создания оценки (ставится автоматически)
 
     def __str__(self):
-        return f"Food: {self.food_rating}, Service: {self.service_rating}"
+        return f"Food: {self.food_rating}, Service: {self.service_rating}" # Отображение оценки
+
+
 
 
 """

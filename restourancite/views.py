@@ -13,18 +13,18 @@ from .models import UserRating
 from django.db.models import Q
 from .telegram_bot import send_telegram_message
 
-
+# Отображение страницы с рейтингом
 def rate_page(request):
     return render(request, "restourancite/rating.html")
 
-
+# Главная страница ресторана с выводом столиков, у которых есть доступные слоты
 def home(request):
     tables = Table.objects.filter(available_slots__isnull=False).distinct()
     return render(
         request, "restourancite/restourant_main_page.html", {"tables": tables}
     )
 
-
+# Страницы меню, о ресторане, контактов, напитков — просто рендеринг шаблонов
 def menu(request):
     return render(request, "restourancite/restourant_menu.html")
 
@@ -44,12 +44,12 @@ def drink(request):
 from django.shortcuts import render, redirect
 from .models import TableReservation  # Импортируем модель
 
-
+# Возвращает количество напитков в базе — используется для ajax-запроса, например
 def get_drink_count(request):
     count = TableDrink.objects.count()
     return JsonResponse({"count": count})
 
-
+# Получение доступных дат и времени для бронирования конкретного столика
 def get_available_dates_times(request, table_id):
     """
     Возвращает доступные даты и время для данного столика,
@@ -60,7 +60,7 @@ def get_available_dates_times(request, table_id):
     except Table.DoesNotExist:
         return JsonResponse({'error': 'Столик не найден'}, status=404)
 
-    # Получаем текущую дату и время
+    # Текущая дата и время для фильтрации прошедших слотов
     today = date.today()
     now_time = datetime.now().time() # Используем datetime.now().time() для получения текущего времени
 
@@ -70,11 +70,12 @@ def get_available_dates_times(request, table_id):
     available_slots = TableAvailableSlot.objects.filter(
         Q(table=table) &
         (
-            Q(date__gt=today) |  # Даты после сегодняшней
-            Q(date=today, time__gte=now_time) # Сегодняшняя дата, но время должно быть текущим или будущим
+            Q(date__gt=today) | # Будущие даты
+            Q(date=today, time__gte=now_time) # Сегодняшняя дата, время >= текущее
         )
-    ).order_by('date', 'time') # Сортируем для последовательного отображения
+    ).order_by('date', 'time') # Сортируем по дате и времени для удобства
 
+    # Формируем словарь: ключ — дата, значение — список доступного времени
     available_dates_times = {}
     for slot in available_slots:
         date_str = slot.date.strftime('%Y-%m-%d')
@@ -83,13 +84,15 @@ def get_available_dates_times(request, table_id):
             available_dates_times[date_str] = []
         available_dates_times[date_str].append(time_str)
 
+    # Возвращаем JSON с доступными датами и временем
     return JsonResponse({'available_dates_times': available_dates_times})
 
-
+# Обработка страницы бронирования столика
 def TableReservation_view(request):
+    # Получаем список столиков с доступными слотами
     tables = Table.objects.filter(available_slots__isnull=False).distinct()
     if request.method == "POST":
-        # Получаем данные из формы
+        # Получаем данные из POST-запроса формы бронирования
         name = request.POST.get("form_name")
         surname = request.POST.get("form_surname")
         patronymic = request.POST.get("form_patronymic")
@@ -101,7 +104,7 @@ def TableReservation_view(request):
         description = request.POST.get("floatingTextarea")
         agreed_to_policy = request.POST.get("flexCheckDefault")
 
-        # Проверка обязательного согласия с политикой конфиденциальности
+        # Проверяем согласие с политикой конфиденциальности — обязательное условие
         if not agreed_to_policy:
             return render(
                 request,
@@ -112,7 +115,7 @@ def TableReservation_view(request):
                 },
             )
 
-        # Проверка выбранного столика
+        # Проверяем, выбран ли столик
         table_id = request.POST.get("form_table")
         if not table_id:
             return render(
@@ -129,7 +132,7 @@ def TableReservation_view(request):
                 {"error": "Выбранный столик не существует.", "tables": tables},
             )
 
-        # Проверка даты и времени
+        # Проверяем, что дата и время выбраны
         if not date or not time:
             return render(
                 request,
@@ -137,6 +140,7 @@ def TableReservation_view(request):
                 {"error": "Выберите дату и время.", "tables": tables},
             )
 
+        # Парсим дату и время из строк
         try:
             selected_date = datetime.strptime(date, "%Y-%m-%d").date()
             selected_time = datetime.strptime(time, "%H:%M").time()
@@ -147,7 +151,7 @@ def TableReservation_view(request):
                 {"error": "Некорректный формат даты или времени.", "tables": tables},
             )
 
-        # Проверяем, что слот доступен в TableAvailableSlot
+        # Проверяем, что выбранный слот доступен в базе
         slot_exists = TableAvailableSlot.objects.filter(
             table=table, date=selected_date, time=selected_time
         ).exists()
@@ -159,7 +163,7 @@ def TableReservation_view(request):
                 {"error": "Выбранный слот недоступен.", "tables": tables},
             )
 
-        # Проверка количества гостей
+        # Проверяем корректность и положительность количества гостей
         try:
             guests_number = int(guests_number)
             if guests_number <= 0:
@@ -178,7 +182,7 @@ def TableReservation_view(request):
                 {"error": "Введите корректное количество гостей.", "tables": tables},
             )
 
-        # Сохраняем данные в базу данных
+        # Создаем новую запись бронирования и сохраняем в базу
         reservation = TableReservation(
             table=table,
             name=name,
@@ -194,6 +198,7 @@ def TableReservation_view(request):
         )
         reservation.save()
 
+        # Экранируем данные для безопасности при формировании сообщения
         safe_table_number = html.escape(str(table.number))
         safe_name = html.escape(name)
         safe_surname = html.escape(surname)
@@ -202,7 +207,7 @@ def TableReservation_view(request):
         safe_guests = html.escape(str(guests_number))
         safe_description = html.escape(description or 'нет')
 
-        # Формируем сообщение с безопасными данными
+        # Формируем текст сообщения для Telegram с деталями бронирования
         message_text = (
             f"<b>🛎️ Новое бронирование столика!</b>\n\n"
             f"<b>Столик:</b> №{safe_table_number}\n"
@@ -215,24 +220,25 @@ def TableReservation_view(request):
             f"<b>Описание:</b> {safe_description}"
         )
         
-        # Отправляем сообщение
+        # Отправляем уведомление администратору в Telegram
         send_telegram_message(message_text)
         
-        # Удаляем слот из TableAvailableSlot
+        # После успешного бронирования удаляем занятый слот из доступных
         TableAvailableSlot.objects.filter(
             table=table, date=selected_date, time=selected_time
         ).delete()
 
-        # Обновляем список столиков с доступными слотами
+        # Обновляем список столиков с доступными слотами для рендера страницы
         tables = Table.objects.filter(available_slots__isnull=False).distinct()
 
-        # Вернуть сообщение об успехе на той же странице
+        # Возвращаем страницу с сообщением об успешном бронировании
         return render(
             request,
             "restourancite/restourant_main_page.html",
             {"success": "Ваше бронирование успешно сохранено!", "tables": tables},
         )
 
+    # При GET-запросе просто отображаем страницу с доступными столиками
     return render(
         request, "restourancite/restourant_main_page.html", {"tables": tables}
     )
@@ -243,16 +249,19 @@ from .models import Tableappeal
 
 def Tableappeal_view(request):
     if request.method == "POST":
+        # Получаем данные из формы по именам полей
         name_surname_patronymic = request.POST.get("form_FCs_appeal")
         email = request.POST.get("form_mail_appeal")
         appeal_type_select = request.POST.get("form_select_appeal")
         phone = request.POST.get("form_telephone_appeal")
         appeal_text = request.POST.get("floatingTextarea_appeal")
+        # Проверяем, поставил ли пользователь галочку согласия с политикой
         agreed_to_policy1 = request.POST.get(
             "flexCheckDefault_appeal"
         )  # Это будет "true", если выбрано
 
-        if not agreed_to_policy1:  # Проверка согласия с политикой
+        # Если пользователь не согласился с политикой — возвращаем страницу с ошибкой
+        if not agreed_to_policy1:
             return render(
                 request,
                 "restourancite/restourant_me.html",
@@ -261,17 +270,18 @@ def Tableappeal_view(request):
                 },
             )
 
-        # Создаем и сохраняем новую запись
+        # Создаём новый объект обращения в базе данных
         appeal = Tableappeal(
             name_surname_patronymic=name_surname_patronymic,
             email=email,
             appeal_type_select=appeal_type_select,
             phone=phone,
             appeal_text=appeal_text,
-            agreed_to_policy1=True,
+            agreed_to_policy1=True, # Фиксируем факт согласия
         )
-        appeal.save()
+        appeal.save() # Сохраняем в базу
         
+        # Формируем текст сообщения для отправки в Telegram (или другую систему уведомлений)
         message_text = (
             f"<b>🗣️ Новое обращение с сайта!</b>\n\n"
             f"<b>Тип:</b> {appeal_type_select}\n"
@@ -280,21 +290,25 @@ def Tableappeal_view(request):
             f"<b>Email:</b> {email}\n\n"
             f"<b>Текст обращения:</b>\n{appeal_text}"
         )
-        # Отправляем сообщение
+        # Отправляем уведомление
         send_telegram_message(message_text)
         
+        # Возвращаем страницу с сообщением об успешной отправке
         return render(
             request,
             "restourancite/restourant_me.html",
             {"success": "Ваше обращение успешно отправлено!"},
         )
 
+    # Если метод запроса не POST — просто показываем страницу с формой
     return render(request, "restourancite/restourant_me.html")
 
 
 def get_drink_by_id(request, id):
     try:
+        # Пытаемся найти напиток по ID в базе
         drink = TableDrink.objects.get(id=id)
+        # Формируем абсолютный URL к изображению напитка, если оно есть
         image_url = (
             request.build_absolute_uri(
                 "/drink_images/" + drink.image_drink.name.split("/")[-1]
@@ -302,6 +316,7 @@ def get_drink_by_id(request, id):
             if drink.image_drink
             else None
         )
+        # Собираем данные для отдачи в JSON формате
         data = {
             "name": drink.name,
             "price": drink.price,
@@ -310,8 +325,10 @@ def get_drink_by_id(request, id):
             "image_drink": image_url,
             "drink_type_select": drink.drink_type_select,
         }
+        # Возвращаем JSON с данными о напитке
         return JsonResponse(data)
     except TableDrink.DoesNotExist:
+        # Если напиток не найден, возвращаем ошибку 404 в формате JSON
         return JsonResponse({"error": "Drink not found"}, status=404)
 
 
