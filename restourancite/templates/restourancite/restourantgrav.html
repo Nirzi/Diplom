@@ -8,6 +8,7 @@
     <title>My restourant</title>
   </head>
   <body>
+    <!-- Верхнее меню сайта (шапка) -->
     <div id="divcap">
       <div id="divcapglav">
         <a href="../html/restourantgrav.html" id="capglav">Главная</a>
@@ -23,24 +24,26 @@
       </div>
     </div>
 
+    <!-- Блок с фото ресторана и информацией о меню -->
     <div id="divimgrestourant">
       <div id="divtextdostavka">
         <div id="divh1dostavka">
-          <h1 id="h1dostavka">Меню ресторана</h1>
+          <h1 id="h1dostavka">Меню ресторана</h1> <!-- Заголовок меню -->
         </div>
         <div>
           <div id="divh2doptext">
-            <p id="pdoptext">Русская, европейская и японская кухня</p>
+            <p id="pdoptext">Русская, европейская и японская кухня</p> <!-- Краткое описание кухни -->
           </div>
           <div id="divbuttonmenu">
             <a href="../html/restourantmenu.html" id="abuttonmenu">
               <button id="buttonmenu">
-                <p id="pmenutext">Перейти</p>
+                <p id="pmenutext">Перейти</p> <!-- Кнопка перехода в меню -->
               </button>
             </a>
           </div>
         </div>
       </div>
+      <!-- Изображение интерьера ресторана -->
       <img
         src="../img/interior-shot-of-a-cafe-with-chairs-near-the-bar-with-wooden-tables.jpg"
         alt="фото ресторана"
@@ -48,26 +51,29 @@
       />
     </div>
 
+    <!-- Заголовок раздела "Почему выбирают нас" -->
     <div id="divnazvanieprem">
       <p id="pnazvanieprem">Почему выбирают нас</p>
     </div>
 
+    <!-- Первый ряд преимуществ -->
     <div id="divfirstprem">
+      <!-- Преимущество 1 -->
       <div id="divpremone">
         <div id="divones">
           <div id="premone">
-            <p id="pone">1</p>
+            <p id="pone">1</p> <!-- Номер преимущества -->
           </div>
         </div>
         <div id="divterrasa" class="premtext">
-          <h3 class="h3premtext">Tерраса</h3>
+          <h3 class="h3premtext">Tерраса</h3> <!-- Заголовок -->
           <p id="pterrasa" class="premtext">
             Проведите время на уютной летней террасе, где сочетаются
             удовольствие от кухни, простора и свежего воздуха
-          </p>
+          </p> <!-- Описание -->
         </div>
       </div>
-
+      <!-- Преимущество 2 -->
       <div class="divpreim">
         <div class="divothers">
           <div class="divother">
@@ -82,7 +88,7 @@
           </p>
         </div>
       </div>
-
+      <!-- Преимущество 3 -->
       <div class="divpreim">
         <div class="divothers">
           <div class="divother">
@@ -98,8 +104,9 @@
         </div>
       </div>
     </div>
-
+    <!-- Второй ряд преимуществ -->
     <div id="divsecondprem">
+      <!-- Преимущество 4 -->
       <div class="divpreim">
         <div class="divothers">
           <div class="divother">
@@ -114,7 +121,7 @@
           </p>
         </div>
       </div>
-
+      <!-- Преимущество 5 -->
       <div class="divpreim">
         <div class="divothers">
           <div class="divother">
@@ -129,20 +136,21 @@
         </div>
       </div>
     </div>
-
+    <!-- Блок с формой бронирования столика -->
     <div id="divforma">
       <div id="divtextbron">
         <div id="divtextbrons">
-          <p id="textbron">Бронирование</p>
+          <p id="textbron">Бронирование</p> <!-- Заголовок -->
         </div>
         <div id="divtextzakaz">
-          <p id="textzakaz">Забронируйте столик</p>
+          <p id="textzakaz">Забронируйте столик</p> <!-- Подзаголовок -->
         </div>
       </div>
 
       <div id="divelform">
         <div id="divfirstsecondform">
           <div id="divfirstelform">
+            <!-- Поля для ввода ФИО, email, телефона -->
             <input
               type="text"
               placeholder="ФИО"
@@ -154,6 +162,7 @@
           </div>
 
           <div id="divsecondelform">
+            <!-- Поля для ввода даты, времени и количества гостей -->
             <input type="text" placeholder="Дата" class="elementform" />
             <input type="text" placeholder="Время" class="elementform" />
             <input
@@ -163,7 +172,7 @@
             />
           </div>
         </div>
-
+        <!-- Текстовое поле для дополнительных сообщений -->
         <div>
           <textarea
             rows="4"
@@ -172,7 +181,7 @@
             id="messageelement"
           ></textarea>
         </div>
-
+        <!-- Согласие на обработку персональных данных -->
         <div id="divpersondannie">
           <input type="checkbox" class="checkboxx" id="checkbox1" />
           <label for="checkbox1"></label>
@@ -180,7 +189,7 @@
             >Даю своё согласие на обработку персональных данных</label
           >
         </div>
-
+        <!-- Кнопка отправки брони -->
         <div id="divbuttonbron">
           <button id="buttonbron">
             <p id="pbuttonbron">Забронировать</p>
@@ -188,13 +197,14 @@
         </div>
       </div>
     </div>
-
+    <!-- Блок "Как нас найти" -->
     <div id="div1howfind">
       <div>
-        <p id="phowfind">Как нас найти?</p>
+        <p id="phowfind">Как нас найти?</p> <!-- Заголовок -->
       </div>
       <div id="divformandicon">
         <div id="divicons">
+          <!-- Адрес с иконкой -->
           <div id="firsticonsdiv">
             <img
               src="../img/icons8-маркер геолокации.png"
@@ -210,6 +220,7 @@
               </p>
             </div>
           </div>
+          <!-- Время работы с иконкой -->
           <div class="othericonsdiv">
             <img
             src="../img/icons8-часы-32.png"
@@ -227,6 +238,7 @@
             </p>
           </div>
           </div>
+          <!-- Электронная почта с иконкой -->
           <div class="othericonsdiv">
             <img
             src="../img/icons8-почта-48.png"
@@ -242,6 +254,7 @@
             </p>
           </div>
           </div>
+          <!-- Телефон с иконкой -->
           <div class="othericonsdiv">
             <img
             src="../img/icons8-iphone14-про-32.png"
@@ -258,13 +271,16 @@
           </div>
           </div>
         </div>
-
+        <!-- Контактная форма обратной связи -->
         <div id="divform">
           <div id="divformfioandemail">
+            <!-- Поля для ввода ФИО и email -->
             <input type="text" placeholder="Ваше ФИО" class="elementform"/>
             <input type="text" placeholder="Ваш email" class="elementform"/>
           </div>
+          <!-- Поле для темы обращения -->
           <input type="text" placeholder="Тема обращения" id="elementformtema"/>
+          <!-- Поле для текста обращения -->
           <div>
             <textarea
               rows="4"
@@ -273,6 +289,7 @@
               id="messageelement"
             ></textarea>
           </div>
+          <!-- Кнопка отправки формы -->
           <div id="divbuttonotprav">
             <button id="buttonotprav">
               <p id="pbuttonotprav">Отправить</p>
@@ -283,7 +300,6 @@
     </div>
     <div id="newdiv"></div>
     <script>
-      
     </script>
   </body>
 </html>

@@ -1112,46 +1112,70 @@
       "maple syrup": "Кленовый сироп",
       "Kosher salt": "Соль",
     };
+    // Функция переводит название ингредиента с английского на русский
     function translateToRussian(ingredient) {
       return translationDictionary[ingredient] || ingredient;
     }
-    {% comment %} Функция для генерации информации для карточек через api {% endcomment %}
+    /* Функция для получения данных рецепта через API Edamam и генерации карточек с информацией:
+    - query — строка поиска рецепта (например, "Carbonara")
+    - index — индекс рецепта из массива hits для отображения данных
+    - imageindex — индекс рецепта для выбора изображения
+    - imgContainer — элемент img для отображения картинки рецепта
+    - ingredientsList — ul или ol элемент для списка ингредиентов
+    - Protein_Fat_Carbs_list — ul или ol элемент для списка белков, жиров и углеводов
+    - weight — вес блюда (для отображения)
+    - Calories_weight — ul или ol элемент для отображения калорий и веса
+    - image — элемент img для основного изображения блюда
+    */
     async function getRecipe(query,index,imageindex,imgContainer,ingredientsList,Protein_Fat_Carbs_list,weight,Calories_weight,image) {
-      const APP_ID = '5c5286a6';
-      const APP_KEY = 'fe9032c17912677483845fb44157fb87';
+      const APP_ID = '5c5286a6'; // ID приложения Edamam
+      const APP_KEY = 'fe9032c17912677483845fb44157fb87'; // Ключ приложения Edamam
       const urlSearch = `https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`;
       try {
+        // Отправляем запрос к API Edamam для получения рецептов по ключевому слову query
         const response = await fetch(urlSearch);
         if (!response.ok) {
+          // Если HTTP-ответ содержит ошибку — выбрасываем исключение
           throw new Error(`Ошибка HTTP: ${response.status}`);
         }
+        // Преобразуем ответ в JSON
         const data = await response.json();
         console.log(data)
 
+        // Получаем URL изображения рецепта из объекта с индексом imageindex
         const urlimage = data.hits[imageindex].recipe.image;
+        // Устанавливаем изображение и атрибут alt для тегов image и imgContainer
         image.src = urlimage;
-        image.alt = 'Картинка карбонары';
+        image.alt = 'Картинка карбонары'; // Можно динамически менять под рецепт
         imgContainer.src = urlimage;
-        imgContainer.style.borderRadius = '10px';
+        imgContainer.style.borderRadius = '10px'; // Оформление картинки
         imgContainer.alt = 'Картинка карбонары';
+        // Создаем элементы списка для белков, жиров и углеводов
         let li_c = document.createElement('li')
         let li_f = document.createElement('li')
         let li_p = document.createElement('li')
+        // Извлекаем данные о нутриентах из рецепта (углеводы, жиры, белки)
         let carbs = data.hits[index].recipe.totalNutrients.CHOCDF
         let fats = data.hits[index].recipe.totalNutrients.FAT
         let proteins = data.hits[index].recipe.totalNutrients.PROCNT
+        // Заполняем текст элементов списка, переводим метки и единицы измерения, считаем на 100 грамм
         li_p.textContent = `${translateToRussian(carbs.label)}:${Math.round((carbs.quantity/data.hits[index].recipe.totalWeight)*100)} ${translateToRussian(carbs.unit)}`
         li_f.textContent = `${translateToRussian(fats.label)}:${Math.round((fats.quantity/data.hits[index].recipe.totalWeight)*100)} ${translateToRussian(fats.unit)}`
         li_c.textContent = `${translateToRussian(proteins.label)}:${Math.round((proteins.quantity/data.hits[index].recipe.totalWeight)*100)} ${translateToRussian(proteins.unit)}`
+        // Добавляем элементы в список нутриентов на страницу
         Protein_Fat_Carbs_list.appendChild(li_c)
         Protein_Fat_Carbs_list.appendChild(li_f)
         Protein_Fat_Carbs_list.appendChild(li_p)
+        // Создаем элемент списка для калорий на 100 грамм
         let li_calories = document.createElement('li');
         li_calories.textContent = `${'Калории'}:${Math.floor((data.hits[index].recipe.calories/data.hits[index].recipe.totalWeight)*100)} ${'ккал на 100 грамм'}`
+        // Создаем элемент списка для отображения общего веса блюда
         let li_weight = document.createElement('li');
         li_weight.textContent = `Вес блюда: ${parseInt(weight)} грамм`;
+        // Добавляем калории и вес в соответствующий контейнер
         Calories_weight.appendChild(li_calories)
         Calories_weight.appendChild(li_weight)
+        // Перебираем ингредиенты рецепта, переводим их на русский и добавляем в список ингредиентов
         for (let i = 0; i < data.hits[index].recipe.ingredients.length; i++) {
           let ingredient = data.hits[index].recipe.ingredients[i].food;
           let translatedIngredient = translateToRussian(ingredient); // Используем функцию перевода
@@ -1159,12 +1183,19 @@
           li.textContent = translatedIngredient;
           ingredientsList.appendChild(li);
         }
+        // Возвращаем массив с рецептами
         return data.hits;
       } catch (error) {
+        // Обрабатываем ошибки запроса или парсинга
         console.error("Ошибка при запросе данных:", error);
       }
     }
     document.addEventListener('DOMContentLoaded', async function(){
+      // Инициализация переменных с элементами DOM для разных рецептов:
+      // Для каждого рецепта берутся контейнеры для списка ингредиентов,
+      // изображений, нутриентов и калорий/веса блюда.
+      // Ниже пример для пасты карбонара, аналогично для других блюд.
+
       // Переменные для пасты карбонара
       const spisok_pasta_carbonara = document.getElementById('spisok_pasta_carbonara');
       const image_container_pasta_carbonara = document.getElementById('image_container_pasta_carbonara');
@@ -1244,6 +1275,7 @@
       const Calories_weight_pumpkin_cream_soup = document.getElementById('Calories_weight_pumpkin_cream_soup');
       const image_pumpkin_cream_soup = document.getElementById('image_pumpkin_cream_soup');
       try{
+        // Запускаем все запросы параллельно через Promise.all для загрузки данных и отображения на странице
         await Promise.all([
         {% comment %} Вызов для всех паст {% endcomment %}
         getRecipe('Carbonara',2,1,image_container_pasta_carbonara,spisok_pasta_carbonara,Protein_Fat_Carbs_pasta_carbonara,360,Calories_weight_pasta_carbonara,image_pasta_carbonara),
@@ -1263,6 +1295,7 @@
         getRecipe('Pumpkin cream soup',0,1,image_container_pumpkin_cream_soup,spisok_pumpkin_cream_soup,Protein_Fat_Carbs_pumpkin_cream_soup,350,Calories_weight_pumpkin_cream_soup, image_pumpkin_cream_soup),
         ]);
       }catch(error){
+        // Обработка ошибки при загрузке рецептов (например, если API не отвечает)
         console.error("Ошибка при загрузке рецептов:", error)
       }
     })

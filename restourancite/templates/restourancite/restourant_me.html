@@ -11,12 +11,15 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <!-- Иконка сайта -->
     <link rel="icon" href="{% static 'img_restourant/free-icon-restaurant-562678.png' %}">
   <style>
+    /* Стили для блока хедера (центрируем содержимое) */
     #header_block{
       display: flex;
       justify-content: center;
     }
+    /* Стили ссылок в хедере */
     .link_header_item{
       padding: 5px;
       text-decoration: none;
@@ -24,17 +27,20 @@
       color:#F2F4F3;
       font-size: 22px;
     }
+    /* Эффект наведения на ссылки */
     .link_header_item:hover{
       text-decoration: underline #F2F4F3;
       text-decoration-thickness: 1.5px;
       text-underline-offset: 10px;
       transition: 0.7s;
     }
+    /* Стили для хедера */
     .header{
       background-color: #0A0908;
       margin: 0;
       padding: 0;
     }
+    /* Основные стили body */
     body{
       margin: 0;
       background-color: #F2F4F3;
@@ -42,14 +48,17 @@
       padding: 0;
       font-family: 'Courier New', Courier, monospace;
     }
+    /* Стили для полей формы в фокусе */
     .form-control:focus {
       border-color: #ff896e !important; 
       box-shadow: 0 0 5px rgba(255, 87, 51, 0.5) !important;
     }
+     /* Стили для полей формы (input) */
     .form-control{
       border-color: #fccec4 !important; 
       background-color: white !important;
     }
+    /* Аналогичные стили для select */
     .form-select:focus{
       border-color: #ff896e !important; 
       box-shadow: 0 0 5px rgba(255, 87, 51, 0.5) !important;
@@ -58,20 +67,23 @@
       border-color: #fccec4 !important; 
       background-color: white !important;
     }
+    /* Стили для формы (отступы, тень и скругления) */
     #form_appeal{
       margin-top: 20px;
       padding: 30px;
       border-radius: 20px;
       box-shadow: 10px 10px 30px rgba(0,0,0,0.5);
     }
+    /* Стили для блока с текстом перед input */
     .input-group-text{
       background-color: white !important;
       border: 1px solid #F2F4F3;
     }
+    /* Отступы у групп инпутов */
     .input-group{
       margin-top: 10px;
     }
-    
+    /* Стили для textarea */
     textarea{
       border-color: #fccec4 !important; 
       background-color: white !important;
@@ -81,45 +93,53 @@
       border-color: #ff896e !important; 
       box-shadow: 0 0 5px rgba(255, 87, 51, 0.5) !important;
     }
+    /* Стили для кнопки отправки */
     #button_submit_appeal{
       background-color: #5E503F !important;
       border: 0 !important;
       color:white !important;
     }
+    /* Эффект наведения на кнопку */
     #button_submit_appeal:hover{
       background-color: #463626 !important;
       transition: 0.5s;
     }
+    /* Курсор для чекбоксов и их подписей */
     .form-check-input{
       cursor: pointer;
     }
     .form-check-label{
       cursor: text;
     }
+    /* Стили для чекбокса при включении */
     #flexCheckDefault_appeal:checked{
       background-color: #5E503F !important;
       border-color: #ff896e !important; 
       box-shadow: 0 0 5px 3px rgba(255, 87, 51, 0.5) !important;
     }
+    /* Стили для чекбокса при выключении */
     #flexCheckDefault_appeal:not(:checked){
       background-color: white;
       border-color: #ff896e !important; 
       box-shadow: 0 0 3px rgba(255, 87, 51, 0.5) !important;
     }
+    /* Стили для футера */
     footer{
       background-color: #0A0908;
       color:#F2F4F3 !important;
     }
+    /* Класс для красного цвета (звёздочка) */
     .color_red{
       color: red;
     }
+    /* Убираем стрелки у input[type=number] для Webkit (Chrome, Safari) */
     input[type=number]::-webkit-outer-spin-button,
     input[type=number]::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
     }
     
-    /* Для браузеров на основе Firefox */
+    /* Для Firefox убираем стрелки в input[type=number] */
     input[type=number] {
       -moz-appearance: textfield;
       appearance: none;
@@ -128,26 +148,16 @@
 </head>
 <body>
   {% load static %}
+  <!-- Хедер с меню -->
   <header class="header p-3 sticky-top" id="header">
-    <!-- Создаём контейнер для удобной верстки -->
     <div class="container-fluid">
       <div class="row">
-        <!-- Создаём блок для всех кнопок header -->
         <div class="text-center col-12">
-          <!-- Кнопка меню для перехода на другую страницу у header -->
-          <a
-            class="link_header_item mx-3 p-2"
-            href="{% url 'home' %}"
-            >Главная</a
-          >
-          <!-- Кнопка О нас для перехода на другую страницу у header -->
-          <a class="link_header_item mx-3 p-2" href="{% url 'menu' %}"
-            >Меню</a
-          >
-          <!-- Кнопка напитки для перехода на другую страницу у header -->
+          <!-- Ссылки навигации -->
+          <a class="link_header_item mx-3 p-2" href="{% url 'home' %}">Главная</a>
+          <a class="link_header_item mx-3 p-2" href="{% url 'menu' %}">Меню</a>
           <a class="link_header_item mx-3 p-2" href="{% url 'drink' %}">Барная карта</a>
           <a class="link_header_item mx-3 p-2" href="{% url 'rate' %}">Оценить нас</a>
-          <!-- Кнопка Контакты для перехода на другую страницу у header -->
         </div>
       </div>
     </div>
@@ -157,43 +167,53 @@
     <div class="container" style="margin-top: 50px; margin-bottom: 100px; text-align: center;">
       <div class="row" style="display: flex; justify-content: center; margin-left: 3px; margin-right: 3px;">
         <div>
+          <!-- Заголовок формы -->
           <h2>Обращение</h2>
         </div>
+        <!-- Форма обращения с отправкой методом POST -->
         <form action="{% url 'Tableappeal_view' %}" method="post" id="form_appeal" class="col-sm-12 col-md-9 col-lg-6 col-xl-5">
           {% csrf_token %}
+          <!-- Поле ввода ФИО с плавающей подсказкой -->
           <div class="form-floating mb-3">
             <input type="text" class="form-control" id="form_FCs_appeal" name="form_FCs_appeal" placeholder="Иванов Иван Иванович" required>
             <label for="floatingInput">ФИО<span class="color_red">*</span></label>
           </div>
+          <!-- Поле ввода email -->
           <div class="form-floating mb-3">
             <input type="email" class="form-control" id="form_mail_appeal" name="form_mail_appeal" placeholder="example@gmail.com" required>
             <label for="floatingInput">E-mail<span class="color_red">*</span></label>
           </div>
+          <!-- Поле ввода телефона (не обязательное) -->
           <div class="form-floating mb-3">
             <input type="tel" class="form-control" id="form_telephone_appeal" name="form_telephone_appeal" placeholder="+7 (000) 000-00-00">
             <label for="floatingInput">Телефон</label>
           </div>
+          <!-- Выпадающий список с типом обращения -->
           <select class="form-select" id="form_select_appeal" name="form_select_appeal" aria-label="Default select example" required>
             <option selected>Тип обращение</option>
             <option value="Предложение">Предложение</option>
             <option value="Заявление">Заявление</option>
             <option value="Жалоба">Жалоба</option>
           </select>
+          <!-- Текстовое поле с описанием обращения -->
           <div class="form-floating">
             <textarea class="form-control" placeholder="Описание" id="floatingTextarea_appeal" name="floatingTextarea_appeal" required></textarea>
             <label for="floatingTextarea">Текст обращения<span class="color_red">*</span></label>
           </div>
+          <!-- Чекбокс согласия на обработку персональных данных -->
           <div class="form-check" style="text-align: start; margin-top: 10px;">
             <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault_appeal" name="flexCheckDefault_appeal" required>
             <label class="form-check-label" for="flexCheckDefault_appeal">
                 Я соглашаюсь с политикой конфиденциальности сайта
             </label>
           </div>
+          <!-- Кнопка отправки формы -->
           <button type="submit" class="btn btn-primary" id="button_submit_appeal" style="margin-top:10px;">Отправить</button>
         </form>
       </div>
     </div>
   </main>
+  <!-- Футер с контактами и временем работы -->
   <footer id="footer">
     <div class="container">
       <div class="row" style="display: flex; justify-content: space-around;">
@@ -214,18 +234,20 @@
   </footer>
   <script>
     <script>
+      // Вешаем обработчик события на кнопку отправки
       document.getElementById('button_submit_appeal').addEventListener('click', function(event) {
-        event.preventDefault(); // Остановить стандартное поведение кнопки отправки формы
-      
+        event.preventDefault(); // Останавливаем стандартную отправку формы
+        
+        // Получаем значения полей и чекбокса
         const form_FCs = document.getElementById('form_FCs_appeal').value.trim();
         const form_email = document.getElementById('form_mail_appeal').value.trim();
         const floatingTextarea_appeal = document.getElementById('floatingTextarea_appeal').value.trim();
         const flexCheckDefault_appeal = document.getElementById('flexCheckDefault_appeal');
       
-        // Проверки перед отправкой формы
+        // Проверяем обязательные поля
         if (form_FCs === '') {
           alert('Пожалуйста, введите своё ФИО');
-          return; // Выход из функции
+          return; // Прекращаем выполнение
         } 
         if (floatingTextarea_appeal === '') {
           alert('Пожалуйста, введите обращение');
@@ -239,19 +261,21 @@
           alert('Пожалуйста, подтвердите своё согласие на обработку персональных данных');
           return; // Выход из функции
         } 
-        // Если все проверки пройдены, отправляем форму
+        // Если все проверки пройдены — отправляем форму
         document.getElementById('form_appeal').submit(); // Отправка формы на сервер
       });
     </script>
     
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <!-- Если в контексте шаблона есть переменная success, показываем alert с этим сообщением -->
   {% if success %}
   <script>
       alert("{{ success }}");
   </script>
   {% endif %}
-
+  
+  <!-- Если в контексте шаблона есть переменная error, выводим её содержимое в виде Bootstrap-уведомления об ошибке -->
   {% if error %}
   <div class="alert alert-danger">
       {{ error }}
