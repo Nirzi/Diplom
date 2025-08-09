@@ -4,16 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Барная карта</title>
+  <!-- Подключаем статические файлы -->
   {% load static %}
+  <!-- Подключаем Bootstrap CSS из CDN -->
   <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+  <!-- Подключаем кастомный CSS, лежащий в статике -->
   <link href="{% static 'css_restourant\restourant_drink.css' %}"></link>
+  <!-- Иконка сайта -->
   <link rel="icon" href="{% static 'img_restourant/free-icon-restaurant-562678.png' %}">
   <style>
+    /* Стили для хедера */
     #header_block{
       display: flex;
       justify-content: center;
@@ -47,37 +52,27 @@
 </head>
 <body>
   {% load static %}
+  <!-- Хедер сайта с навигацией -->
   <header class="header p-3 sticky-top" id="header">
-    <!-- Создаём контейнер для удобной верстки -->
     <div class="container-fluid">
       <div class="row">
-        <!-- Создаём блок для всех кнопок header -->
         <div class="text-center col-12">
-          <!-- Кнопка меню для перехода на другую страницу у header -->
-          <a
-            class="link_header_item mx-3 p-2"
-            href="{% url 'home' %}"
-            >Главная</a
-          >
-          <!-- Кнопка О нас для перехода на другую страницу у header -->
-          <a class="link_header_item mx-3 p-2" href="{% url 'menu' %}"
-            >Меню</a
-          >
-          <!-- Кнопка О нас для перехода на другую страницу у header -->
+          <!-- Ссылки навигации с использованием Django url тегов -->
+          <a class="link_header_item mx-3 p-2" href="{% url 'home' %}">Главная</a>
+          <a class="link_header_item mx-3 p-2" href="{% url 'menu' %}">Меню</a>
           <a class="link_header_item mx-3 p-2" href="{% url 'about' %}">Обращение</a>
           <a class="link_header_item mx-3 p-2" href="{% url 'rate' %}">Оценить нас</a>
-          
-          <!-- Кнопка Контакты для перехода на другую страницу у header -->
           <a class="link_header_item mx-3 p-2" href="#footer">Контакты</a>
         </div>
       </div>
     </div>
   </header>
+  <!-- Основной контейнер для вывода карточек напитков -->
   <main>
     <div class="container" id="container">
     </div>
   </main>
-
+  <!-- Футер с информацией о времени работы и контактах -->
   <div class="container-fluid mt-5" style="background-color: #0A0908; color:#F2F4F3;" id="div_footer">
       <div class="row" style="display: flex; justify-content: space-around;">
         <div class="col-sm-12 col-md-6 col-lg-6 text-center mt-4 pb-3">
@@ -94,96 +89,106 @@
         </div>
       </div>
     </div>
+  <!-- Подключаем Bootstrap JS для работы компонентов -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script>
+    // Получаем контейнер, куда будем вставлять карточки напитков
     const mainContainer = document.getElementById('container')
+    // Асинхронная функция для получения количества напитков из БД
     async function getDrinkCount(){
-      const responce = await fetch('/get_drink_count/');
+      const responce = await fetch('/get_drink_count/'); // Получаем JSON с количеством
       const data = await responce.json();
       return data.count;
     }
-
+    // Главная функция для загрузки всех напитков и отображения по категориям
     async function AllDrink() {
       const count = await getDrinkCount();
-      const categories = {}; // To keep track of category blocks
-    
+      const categories = {}; // Объект для хранения контейнеров категорий, чтобы не дублировать
+
+      // Цикл по всем ID напитков от 1 до count
       for (var drinkid = 1; drinkid <= count; drinkid++) {
-        const url = `/get-drink/${drinkid}/`;
-        await getDrink(url, categories);
+        const url = `/get-drink/${drinkid}/`; // URL для получения данных конкретного напитка
+        await getDrink(url, categories); // Загрузка и отрисовка карточки напитка
       }
     }
-    
+    // Функция загрузки данных напитка и создание карточки
     async function getDrink(url, categories) {
       const response = await fetch(url);
       const data = await response.json();
-      console.log(data);
+      console.log(data); // Для отладки выводим полученные данные в консоль
 
     
-      // Get or create the category block
-      const categoryKey = data.drink_type_select;
-      let categoryDiv = categories[categoryKey];
-    
+      
+      const categoryKey = data.drink_type_select; // Определяем категорию напитка (ключ из БД)
+      let categoryDiv = categories[categoryKey]; // Ищем уже созданный блок для этой категории
+      
+      // Если такого блока ещё нет — создаём новый контейнер для категории
       if (!categoryDiv) {
-        // Create the category block
         categoryDiv = document.createElement('div');
         categoryDiv.className = "row px-2 mt-5";
         categoryDiv.style.display = 'flex';
-        categoryDiv.style.flexWrap = 'wrap'; // To handle multiple cards
+        categoryDiv.style.flexWrap = 'wrap'; // Позволяет карточкам переходить на новую строку
         categoryDiv.style.justifyContent = 'space-around';
         categoryDiv.style.marginTop = '20px';
     
-        // Create and append the h2 title
+        // Создаём заголовок категории
         const h2 = document.createElement('h2');
-        h2.textContent = getCategoryName(categoryKey);
+        h2.textContent = getCategoryName(categoryKey); // Читаемое название категории по ключу
         categoryDiv.appendChild(h2);
     
-        // Append categoryDiv to main container
+        // Добавляем категорию в основной контейнер
         mainContainer.appendChild(categoryDiv);
     
-        // Store in categories object
+        // Сохраняем в объект категорий
         categories[categoryKey] = categoryDiv;
       }
     
-      // Now create the card and append to categoryDiv
+      // Создаём карточку напитка (Bootstrap card)
       const cardDiv = document.createElement('div');
       cardDiv.className = "card mb-3";
       cardDiv.style.maxWidth = '540px';
-      cardDiv.style.margin = '10px'; // Add some margin between cards
-    
+      cardDiv.style.margin = '10px';
+      
+      // Внутри карточки создаём строку (row)
       const row = document.createElement('div');
       row.className = 'row g-0';
       cardDiv.appendChild(row);
-    
+      
+      // Левая часть с изображением (4 колонки)
       const colImg = document.createElement('div');
       colImg.className = 'col-md-4';
       row.appendChild(colImg);
     
       const img = document.createElement('img');
       img.className = 'img-fluid rounded-start w-100 h-100';
-      img.style.objectFit = 'cover';
+      img.style.objectFit = 'cover'; // Изображение обрезается по размеру контейнера
       img.alt = data.name;
       img.src = data.image_drink;
       colImg.appendChild(img);
-    
+      
+      // Правая часть с информацией (8 колонок)
       const colContent = document.createElement('div');
       colContent.className = 'col-md-8';
       row.appendChild(colContent);
-    
+      
       const cardBody = document.createElement('div');
       cardBody.className = 'card-body';
       colContent.appendChild(cardBody);
-    
+      
+      // Название напитка жирным
       const h5 = document.createElement('h5');
       h5.className = 'card-title';
       h5.style.fontWeight = 'bold';
       h5.textContent = data.name;
       cardBody.appendChild(h5);
-    
+      
+      // Описание напитка
       const pDescription = document.createElement('p');
       pDescription.className = 'card-text';
       pDescription.textContent = data.description_drink;
       cardBody.appendChild(pDescription);
-    
+      
+      // Цена напитка
       const pPrice = document.createElement('p');
       pPrice.className = 'card-text';
       pPrice.style.fontWeight = 'bold';
@@ -194,49 +199,59 @@
       small.textContent = `${data.price} рублей`;
       pPrice.appendChild(small);
       cardBody.appendChild(pPrice);
-    
+      
+      // Кнопка "Подробнее" для показа дополнительной информации в offcanvas
       const button = document.createElement('button');
       button.className = 'btn btn-primary button_card_detail';
       button.type = 'button';
+      // Устанавливаем id offcanvas и связываем кнопку с ним
       button.setAttribute('data-bs-toggle', 'offcanvas');
       const offcanvasId = 'offcanvasExample_' + data.name.replace(/\s/g, '_').toLowerCase();
       button.setAttribute('data-bs-target', '#' + offcanvasId);
       button.setAttribute('aria-controls', offcanvasId);
       button.textContent = 'Подробнее';
       cardBody.appendChild(button);
-    
+      
+      // Добавляем карточку в блок категории
       categoryDiv.appendChild(cardDiv);
-
+      
+      // При клике по кнопке создаём и показываем offcanvas с детальной информацией
       button.addEventListener('click', function() {
         createOffcanvas(data);
       });
     }
     
+    // Функция создания offcanvas (выдвижной боковой панели) с подробной информацией о напитке
     function createOffcanvas(data) {
+      // Создаём уникальный id для offcanvas по названию напитка
       const offcanvasId = 'offcanvas_' + data.name.replace(/\s/g, '_').toLowerCase();
     
-      // Check if the offcanvas already exists
+      // Проверяем, есть ли уже offcanvas с таким id, чтобы не дублировать
       let existingOffcanvas = document.getElementById(offcanvasId);
       if (!existingOffcanvas) {
-        // Create the offcanvas
+        // Создаём контейнер offcanvas
         const offcanvasDiv = document.createElement('div');
         offcanvasDiv.className = 'offcanvas offcanvas-start';
         offcanvasDiv.setAttribute('tabindex', '-1');
         offcanvasDiv.id = offcanvasId;
         offcanvasDiv.setAttribute('aria-labelledby', 'offcanvasLabel_' + offcanvasId);
-    
+        
+        // Заголовок offcanvas с кнопкой закрытия
         const offcanvasHeader = document.createElement('div');
         offcanvasHeader.className = 'offcanvas-header';
+
         const closeButton = document.createElement('button');
         closeButton.className = 'btn-close';
         closeButton.setAttribute('data-bs-dismiss', 'offcanvas');
         closeButton.setAttribute('aria-label', 'Close');
         offcanvasHeader.appendChild(closeButton);
         offcanvasDiv.appendChild(offcanvasHeader);
-    
+        
+        // Основное тело offcanvas
         const offcanvasBody = document.createElement('div');
         offcanvasBody.className = 'offcanvas-body';
-    
+        
+        // Создаем и настраиваем изображение напитка для offcanvas
         const imgOffcanvas = document.createElement('img');
         imgOffcanvas.src = data.image_drink;
         imgOffcanvas.className = 'img-fluid';
@@ -246,16 +261,18 @@
         imgOffcanvas.style.margin = '0 auto';
         imgOffcanvas.alt = data.name;
         offcanvasBody.appendChild(imgOffcanvas);
-    
+        
+        // Заголовки для списков ингредиентов и калорий/веса
         const ingredientsHeader = document.createElement('h4');
         ingredientsHeader.textContent = 'Ингредиенты';
         const caloriesandweight = document.createElement('h4');
         caloriesandweight.textContent = 'Калории и масса';
-    
+        
+        // Списки для ингредиентов и калорий/веса
         const ingredientsList = document.createElement('ul');
         const callandweight = document.createElement('ul');
 
-        // Используем обычный цикл for для перебора массива
+        // Заполняем калории и вес, если данные есть
         if (Array.isArray(data.structure_drink.ingredients)) {
           for (var i = 0; i < data.structure_drink.ingredients.length; i++) {
             const li = document.createElement('li');
@@ -296,7 +313,7 @@ document.body.appendChild(offcanvasDiv);
       const offcanvasElement = new bootstrap.Offcanvas(document.getElementById(offcanvasId));
       offcanvasElement.show();
     }
-    
+    // Функция для отображения названия категории по ключу
     function getCategoryName(key) {
       const categories = {
         'champagne': 'Шампанское и игристые вина',

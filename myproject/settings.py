@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -26,8 +25,10 @@ SECRET_KEY = "django-insecure-6(ee64786y7g*tj9zg#bqb!870xv4di)f@k!!!vnlyisvfh&p1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Разрешаю хосты для входящих запросов
 ALLOWED_HOSTS = ["*"]
 
+# Тут указываю ссылку на свой ngrok для того чтобы он работал
 CSRF_TRUSTED_ORIGINS = ["https://5dcd4976fdc0.ngrok-free.app"]
 
 # Application definition
@@ -59,7 +60,7 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
             BASE_DIR / "restourancite" / "templates"
-        ],  # Укажите путь к папке шаблонов
+        ],# Путь к папке с шаблонами приложения
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -83,12 +84,12 @@ DATABASES = {
     "default": {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [BASE_DIR / "restourancite" / "templates"],
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "Restouran",
-        "USER": "postgres",
-        "PASSWORD": "1234",
-        "HOST": "localhost",
-        "PORT": "5433",
+        "ENGINE": "django.db.backends.postgresql", # Используем PostgreSQL
+        "NAME": "Restouran", # Имя базы данных
+        "USER": "postgres", # Пользователь базы
+        "PASSWORD": "1234", # Пароль
+        "HOST": "localhost", # Адрес сервера базы данных
+        "PORT": "5433", # Порт подключения к базе
     }
 }
 
@@ -115,6 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
+# Локализация и временные зоны
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"
@@ -127,10 +129,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "static/" # URL, по которому будут доступны статические файлы
 
 STATICFILES_DIRS = [
-    BASE_DIR / "restourancite" / "static",  # Укажи путь к директории 'static'
+    BASE_DIR / "restourancite" / "static", # Путь к директории со статическими файлами приложения
 ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -138,66 +140,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-MEDIA_ROOT = BASE_DIR
-MEDIA_URL = "/"
+MEDIA_ROOT = BASE_DIR # Папка, где будут храниться медиафайлы
+MEDIA_URL = "/" # URL для доступа к медиафайлам
 
+# Токен и чат ID для Telegram-бота
 TELEGRAM_BOT_TOKEN = '8123046063:AAGdt1GALe7mbCRCOeu-zoEckBS-9Uq7h2w'
 TELEGRAM_CHAT_ID = '1035834108'
-
-"""
-План курсовой работы: "Разработка веб-приложения для ресторана"
-
-Введение
-Обоснование выбора темы.
-Цель и задачи исследования.
-Актуальность разработки веб-приложения для ресторанного бизнеса.
-Глава 1. Анализ предметной области
-Анализ текущего состояния рынка и современных тенденций в ресторанной сфере.
-Исследование аналогичных веб-приложений и их функциональных возможностей.
-Выявление требований к разработке веб-приложения.
-Глава 2. Проектирование системы
-Определение функциональных требований.
-Управление бронированием столиков.
-Представление меню и барной карты.
-Обратная связь и система оценки.
-Обращения клиентов.
-Разработка архитектуры веб-приложения:
-Выбор архитектурного стиля.
-Структура базы данных.
-Проектирование пользовательского интерфейса:
-Навигация.
-Дизайн основных страниц.
-Учет удобства пользователя.
-Глава 3. Реализация веб-приложения
-Выбор инструментов и технологий разработки:
-Django как серверная часть.
-Bootstrap для разработки пользовательского интерфейса.
-PostgreSQL для хранения данных.
-Реализация основных модулей:
-Модуль бронирования столиков.
-Модуль представления меню и напитков.
-Модуль обратной связи и оценки.
-Модуль работы с обращениями.
-Интеграция системы нечеткой логики для оценки ресторана.
-Глава 4. Тестирование и оценка качества приложения
-Методы и инструменты тестирования.
-Тестирование функциональности модулей.
-Оценка производительности приложения.
-Анализ пользовательского опыта.
-Глава 5. Внедрение и рекомендации
-Планы внедрения веб-приложения в деятельность ресторана.
-Возможные направления дальнейшей разработки:
-Интеграция с внешними системами (онлайн-оплата, доставка).
-Добавление личного кабинета для пользователей.
-Использование ИИ для персонализированных рекомендаций.
-Заключение
-Подведение итогов работы.
-Достижение поставленных целей.
-Перспективы использования разработанного веб-приложения.
-Приложения
-Код веб-приложения.
-Модели базы данных.
-Скриншоты основных страниц.
-Результаты тестирования.
-Это план, который охватывает все ключевые аспекты разработки вашего веб-приложения. Если нужно что-то изменить или уточнить, дайте знать!
-"""

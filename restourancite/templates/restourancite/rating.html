@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+        /* Общие стили для html и body для полной высоты */
         html, body {
             height: 100%;
             margin: 0;
             padding: 0;
         }
+        /* Стили для body - флекс-контейнер с колонной, фоновый цвет, шрифт */
         body {
             display: flex; 
             flex-direction: column; 
@@ -19,13 +21,16 @@
             color: #0A0908;
             font-family: 'Courier New', Courier, monospace;
         }
+        /* Контейнер для основного контента растягивается по высоте */
         #content-wrap {
             flex: 1; 
         }
+        /* Центрируем блок заголовка */
         #header_block {
             display: flex;
             justify-content: center;
         }
+        /* Стили для ссылок в шапке */
         .link_header_item {
             padding: 5px;
             text-decoration: none;
@@ -33,39 +38,47 @@
             color: #F2F4F3;
             font-size: 22px;
         }
+        /* Ховер эффект для ссылок */
         .link_header_item:hover {
             text-decoration: underline #F2F4F3;
             text-decoration-thickness: 1.5px;
             text-underline-offset: 10px;
             transition: 0.7s;
         }
+        /* Стили для шапки сайта */
         .header {
             background-color: #0A0908;
             margin: 0;
             padding: 0;
         }
+        /* Отступ сверху у основного контейнера */
         .container {
             margin-top: 50px;
         }
+        /* Контейнер для звездного рейтинга: флекс, центрирование, размер и цвет звезд */
         .star-rating {
             display: flex;
             justify-content: center;
             gap: 5px;
             font-size: 2rem;
-            color: #ccc;
+            color: #ccc; /* светло-серый цвет по умолчанию */
             cursor: pointer;
         }
+        /* Каждая звезда плавно меняет цвет */
         .star-rating .star {
             transition: color 0.3s ease;
         }
+        /* Цвет звезд при выборе или наведении */
         .star-rating .star.selected,
         .star-rating .star.hover {
             color: #ffc107;
         }
+        /* Кнопка отправки центрирована и с отступами */
         .btn {
             display: block;
             margin: 20px auto;
         }
+        /* Стиль блока с итоговой оценкой */
         .overall-score {
             text-align: center;
             margin-top: 30px;
@@ -74,12 +87,14 @@
     </style>
 </head>
 <body>
+    <!-- Подгружаем статику Django -->
     {% load static %}
-
+    <!-- Шапка сайта с навигацией -->
     <header class="header p-3 sticky-top" id="header">
       <div class="container-fluid">
           <div class="row">
               <div class="text-center col-12">
+                  <!-- Ссылки на основные страницы сайта с использованием Django url шаблонов -->
                   <a class="link_header_item mx-3 p-2" href="{% url 'home' %}">Главная</a>
                   <a class="link_header_item mx-3 p-2" href="{% url 'menu' %}">Меню</a>
                   <a class="link_header_item mx-3 p-2" href="{% url 'drink' %}">Барная карта</a>
@@ -88,23 +103,29 @@
           </div>
       </div>
     </header>
-
+    
+    <!-- Основной контент страницы -->
     <div id="content-wrap">
       <div class="container">
         <h1 class="text-center">Оцените наш ресторан</h1>
+        <!-- Форма для оценки ресторана -->
         <form id="rating-form" class="text-center" method="post">
             {% csrf_token %}
+            <!-- Оценка еды -->
             <div class="mb-3">
                 <label class="form-label">Оценка еды:</label>
                 <div class="star-rating" data-rating="food">
+                    <!-- 5 звезд с разными значениями -->
                     <span class="star" data-value="1">★</span>
                     <span class="star" data-value="2">★</span>
                     <span class="star" data-value="3">★</span>
                     <span class="star" data-value="4">★</span>
                     <span class="star" data-value="5">★</span>
                 </div>
+                <!-- Скрытое поле для передачи выбранного рейтинга еды -->
                 <input type="hidden" id="food-rating" name="food_rating" required>
             </div>
+            <!-- Оценка обслуживания -->
             <div class="mb-3">
                 <label class="form-label">Оценка обслуживания:</label>
                 <div class="star-rating" data-rating="service">
@@ -116,6 +137,7 @@
                 </div>
                 <input type="hidden" id="service-rating" name="service_rating" required>
             </div>
+            <!-- Оценка атмосферы -->
             <div class="mb-3">
               <label class="form-label">Оценка атмосферы:</label>
               <div class="star-rating" data-rating="atmosphere">
@@ -127,9 +149,10 @@
               </div>
               <input type="hidden" id="atmosphere-rating" name="atmosphere_rating" required>
             </div>
+            <!-- Кнопка отправки формы -->
             <button type="submit" class="btn btn-primary">Отправить</button>
         </form>
-
+        <!-- Отображение итоговой средней оценки -->
         <div class="overall-score">
             <h2>Общая оценка:</h2>
             <p id="overall-score">-</p>
@@ -139,50 +162,51 @@
 
     <script>
         // Обработчик для звездного рейтинга
+        // При наведении на звезду подсвечиваем ее и все предыдущие (эффект hover)
         $('.star-rating .star').on('mouseover', function () {
             const parent = $(this).parent();
             parent.children('.star').removeClass('hover');
             $(this).addClass('hover').prevAll().addClass('hover');
         });
-
+        // При уходе курсора убираем эффект hover
         $('.star-rating').on('mouseleave', function () {
             $(this).children('.star').removeClass('hover');
         });
-
+        // При клике на звезду выбираем оценку
         $('.star-rating .star').on('click', function () {
             const parent = $(this).parent();
             const value = $(this).data('value');
 
-            // Устанавливаем выбранные звезды
+            // Убираем выделение у всех звезд и ставим для выбранных
             parent.children('.star').removeClass('selected');
             $(this).addClass('selected').prevAll().addClass('selected');
 
-            // Устанавливаем значение в скрытое поле
+            // Записываем значение рейтинга в скрытое поле формы
             const ratingType = parent.data('rating');
             $(`#${ratingType}-rating`).val(value);
         });
 
         // Обработка отправки формы
         $('#rating-form').on('submit', function (event) {
-            event.preventDefault();
+            event.preventDefault(); // Отменяем стандартную отправку
 
-            // Get the values from the hidden input fields
+            // Получаем значения из скрытых полей
             const foodRating = parseInt($('#food-rating').val());
             const serviceRating = parseInt($('#service-rating').val());
             const atmosphereRating = parseInt($('#atmosphere-rating').val());
 
-            // Check if all ratings are selected
+            // Проверяем, выбраны ли все оценки
             if (isNaN(foodRating) || isNaN(serviceRating) || isNaN(atmosphereRating)) {
                 alert('Пожалуйста, оцените все категории.');
                 return;
             }
-
+            // Вычисляем среднее арифметическое от всех оценок
             const overallAverage = (foodRating + serviceRating + atmosphereRating) / 3;
-
+            // Выводим итоговую оценку с точностью до одного знака после запятой
             $('#overall-score').text(overallAverage.toFixed(1));
         });
     </script>
-
+    <!-- Нижний колонтитул с информацией о времени работы и контактах -->
     <div class="container-fluid mt-5" style="background-color: #0A0908; color:#F2F4F3;" id="div_footer">
       <div class="row" style="display: flex; justify-content: space-around;">
         <div class="col-sm-12 col-md-6 col-lg-6 text-center mt-4 pb-3">
@@ -194,6 +218,7 @@
         <div class="col-sm-12 col-md-6 col-lg-6 text-center mt-4 pb-3" style="margin-bottom: 50px;">
           <h4>Контакты</h4>
           <p>+7 (995) 792-67-95<br>+7 (986) 792-67-95<br>nirzzii@mail.ru</p>
+          <!-- Ссылка на телеграм с иконкой -->
           <a href="https://t.me/nirzzii"><img src="{% static 'img_restourant/icons/Иконка_телеграм.png' %}" alt="телеграм" height="40px"  width="40px"></a>
         </div>
       </div>
