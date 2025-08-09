@@ -1,0 +1,29 @@
+#header_block{
+  display: flex;
+  justify-content: center;
+}
+.link_header_item{
+  padding: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  color:#F2F4F3;
+  font-size: 22px;
+}
+.link_header_item:hover{
+  text-decoration: underline #F2F4F3;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 10px;
+  transition: 0.7s;
+}
+.header{
+  background-color: #0A0908;
+  margin: 0;
+  padding: 0;
+}
+body{
+  margin: 0;
+  background-color: #F2F4F3;
+  color:#0A0908;
+  padding: 0;
+  font-family: 'Courier New', Courier, monospace;
+}

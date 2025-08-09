@@ -1,0 +1,572 @@
+  body{
+    margin: 0;
+    opacity: 97%;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+  #divcap{
+    background-color: black;
+    width: 100%;
+    height: 8vh;
+    display: flex;
+    justify-content: center;
+    gap: 3vw;
+    align-items: center;
+    text-align: center;
+    opacity: 90%;
+  }
+  #capglav{
+    text-decoration: none;
+    color: orange;
+    font-size: 22px;
+    font-weight:bolder;
+  }
+  #capglav:hover{
+    color: rgb(255, 207, 50);
+    text-decoration: underline rgb(255, 207, 50);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 10px;
+    transition: 0.7s;
+  }
+  #div1howfind{
+    background-color: rgb(10, 10, 10);
+    width: 100%;;
+    display: grid;
+    justify-content: center;
+    text-align: center;
+  }
+  #phowfind{
+    margin: 0;
+    font-size: 30px;
+    color: orange;
+    padding-top: 5vh;
+  }
+  #capme{
+    text-decoration: none;
+    color: orange;
+    font-size: 22px;
+    font-weight:bolder;
+  }
+  #imggeolocation{
+    width: 30px;
+    height: 30px;
+    background-color: rgb(198,134,66);
+    padding: 1vh;
+    border-radius: 100%;
+  }
+  #imgtime{
+    width: 30px;
+    height: 30px;
+    background-color: rgb(198,134,66);
+    padding: 1vh;
+    border-radius: 100%;
+  }
+  #imgemail{
+    width: 30px;
+    height: 30px;
+    background-color: rgb(198,134,66);
+    padding: 1vh;
+    border-radius: 100%;
+  }
+  #imgphone{
+    width: 30px;
+    height: 30px;
+    background-color: rgb(198,134,66);
+    padding: 1vh;
+    border-radius: 100%;
+  }
+  #divicons{
+    display: grid;
+    justify-content: space-evenly;
+    padding-top: 3vh;
+    gap: 1vw;
+  }
+  #capme:hover{
+    color: rgb(255, 207, 50);
+    text-decoration: underline rgb(255, 207, 50);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 10px;
+    transition: 0.7s;
+  }
+  #capotziv{
+    text-decoration: none;
+    color: orange;
+    font-size: 22px;
+    font-weight:bolder;
+  }
+  #capotziv:hover{
+    color: rgb(255, 207, 50);
+    text-decoration: underline rgb(255, 207, 50);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 10px;
+    transition: 0.7s;
+  }
+  #capcontact{
+    text-decoration: none;
+    color: orange;
+    font-size: 22px;
+    font-weight:bolder;
+  }
+  #capcontact:hover{
+    color: rgb(255, 207, 50);
+    text-decoration: underline rgb(255, 207, 50);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 10px;
+    transition: 0.7s;
+  }
+  #capmenu{
+    text-decoration: none;
+    color: orange;
+    font-size: 22px;
+    font-weight:bolder;
+  }
+  #capmenu:hover{
+    color: rgb(255, 207, 50);
+    text-decoration: underline rgb(255, 207, 50);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 10px;
+    transition: 0.7s;
+  }
+  #imgrestourant{
+    width: 35vw;
+    height: 80vh;
+    border-radius: 10px;
+    box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    animation: fadeid ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 1.5s;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+  }
+  #divimgrestourant{
+    display: flex;
+    justify-content:space-evenly;
+    align-items: center;
+    background-color: rgb(20, 20, 20);
+  }
+  #h1dostavka{
+    font-size: 50px;
+    color:orange;
+  }
+  #divtextdostavka{
+    margin: 0;
+    margin-top: 3vh;
+    display: grid;
+    text-align: center;
+    align-items: start;
+    justify-content: center;
+    gap: 10px;
+  }
+  #pdoptext{
+    font-size: 25px;
+    color:orange;
+  }
+  #divh1dostavka{
+    height: 12vh;
+  }
+  #divh2doptext{
+    height: 6vh;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    text-align: start;
+  }
+  #divbuttonmenu{
+    text-align: start;
+  }
+  #buttonmenu{
+    text-align:center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px rgb(36, 36, 36);
+    width: 8vw;
+    height: 6vh;
+    background-color: rgb(60, 60, 60);
+    cursor: pointer;
+    border: 3px solid black;
+  }
+  #buttonmenu:hover{
+    background-color: rgb(50, 50, 50);
+    transition: 0.4s;
+  }
+  #pmenutext{
+    font-size: 22px;
+    font-weight:unset;
+    color: orange !important;
+  }
+  #abuttonmenu{
+    text-decoration: none;
+    color: white;
+  }
+  #divnazvanieprem{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(30, 30, 30);
+  }
+  #pnazvanieprem{
+    font-size: 40px;
+    color:orange;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+  }
+  @keyframes fadeid{
+    0%{opacity: 0;}
+    100%{opacity: 1;}
+  }
+  #divterrasa{
+    width: 20vw;
+    height: 20vh;
+    border: 1px solid rgb(152, 152, 152);
+    border-radius: 10px;
+  }
+  #divparking{
+    width: 20vw;
+    height: 20vh;
+    border: 1px solid rgb(152, 152, 152);
+    border-radius: 10px;
+  }
+  #divwifi{
+    width: 20vw;
+    height: 20vh;
+    border: 1px solid rgb(152, 152, 152);
+    border-radius: 10px;
+  }
+  #divdostavka{
+    width: 20vw;
+    height: 20vh;
+    border: 1px solid rgb(152, 152, 152);
+    border-radius: 10px;
+  }
+  #divkitchen{
+    width: 20vw;
+    height: 20vh;
+    border: 1px solid rgb(152, 152, 152);
+    border-radius: 10px;
+    padding-left: 1vw;
+    padding-right: 1vw;
+  }
+  #divfirstprem{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgb(30, 30, 30);
+  }
+  #divsecondprem{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgb(30, 30, 30);
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+  }
+  #divpremone{
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    display:table;
+    justify-content:center;
+    align-items: center;
+    text-align: center;
+  }
+  #premone{
+    border: 2px solid rgb(152, 152, 152);
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+    align-items: center;
+    text-align: start;
+    margin-bottom: 5vh;
+    display: flex;
+    justify-content:center;
+  }
+  #divones{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #pone{
+    font-size: 30px;
+    text-align:center;
+    color: orange;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+  #divterrasa{
+    box-shadow: 0px 0px 50px 15px rgba(0, 0, 0, 0.33);
+  }
+  .premtext{
+    text-align: center;
+    color: rgb(255, 207, 117);
+  }
+  .divpreim{
+    display:table;
+    justify-content:center;
+    align-items: center;
+    text-align: center;
+  }
+  .divothertext{
+    box-shadow: 0px 0px 50px 15px rgba(0, 0, 0, 0.33);
+  }
+  .divothers{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3vh;
+  }
+  .divother{
+    border: 2px solid rgb(152, 152, 152);
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+    align-items: center;
+    text-align: start;
+    margin-bottom: 5vh;
+    display: flex;
+    justify-content:center;
+  }
+  .pother{
+    font-size: 30px;
+    text-align:center;
+    color: orange !important;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+  #newdiv{
+    width: 100%;
+    background-color: black;
+    height: 100vh;
+  }
+  .h3premtext{
+    font-size: 22px;
+    color: orange !important;
+  }
+  #textbron{
+    font-size: 50px;
+  }
+  #divforma{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    background-color: rgb(20, 20, 20);
+    height: 35vw;
+    box-shadow: 0px 0px 30px 40px rgba(0, 0, 0, 0.5);
+    
+  }
+  #divtextbron{
+    display: grid;
+    text-align: center;
+  }
+  #divtextbrons{
+    padding: 0;
+    margin: 0;
+    height: 17vh;
+  }
+  #textbron{
+    color: orange;
+
+  }
+  #textzakaz{
+    margin: 0;
+    font-size: 30px;
+    color: rgb(196, 136, 26);
+  }
+  #divelform{
+    display: grid;
+    justify-content: center;
+    gap: 5vh;
+  }
+  #divfirstelform{
+    display: grid;
+    gap: 5vh;
+  }
+  #divsecondelform{
+    display: grid;
+    gap: 5vh;
+  }
+  #divfirstsecondform{
+    display: flex;
+    gap: 3vw;
+  }
+  .elementform{
+    width: 25vw;
+    height: 2vw;
+    background-color: rgb(20, 20, 20);
+    border: 1px solid rgba(127, 79, 79, 0.5);
+    color:white;
+    padding-left: 0.5vw;
+  }
+  .elementform:focus{
+    outline: orange;
+    border-color: orange;
+  }
+  #messageelement{
+    width: 54vw !important;
+    height: 6vw !important;
+    background-color: rgb(20, 20, 20);
+    border: 1px solid rgba(127, 79, 79, 0.5);
+    color:white;
+    text-align: start;
+    vertical-align: top;
+
+  }
+  #messageelement:focus{
+    outline: orange;
+    border-color: orange;
+  }
+  #inputcheckbox{
+    background-color: rgb(20, 20, 20);
+  }
+  .checkboxx {
+    position: absolute;
+    opacity: 0;
+  }
+  
+  /* Стилизация "фальшивого" чекбокса */
+  .checkboxx + label {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border: 1px solid rgba(127, 79, 79, 0.5);
+    cursor: pointer;
+    position: relative;
+  }
+  /* Иконка галочки */
+  .checkboxx:checked + label:before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 1.5px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 1.7px 1.7px 0;
+    transform: rotate(40deg);
+  }
+  #divpersondannie{
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+  #labelsoglas{
+    color:white;
+    margin-left: 0.5vw;
+    font-size: 14px;
+  }
+  #divbuttonbron{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #buttonbron{
+    border: 1px solid rgba(127, 79, 79, 0.5);
+    background-color:rgb(196, 136, 26);
+    border-radius: 30px;
+    font-size: 15px;
+  }
+  #buttonbron:hover{
+    background-color: rgb(255, 193, 7);
+    transition: 0.4s;
+    cursor: pointer;
+  }
+  #pbuttonbron{
+    color: white !important;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  #firsticonsdiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: start;
+    gap: 2vw;
+  }
+  #divtextadress{
+    height: 13vh;
+  }
+  #textadress{
+    font-size: 20px;
+  }
+  #spanwithadres{
+    font-size: 17px;
+  }
+  .colororange{
+    color: orange;
+  }
+  .othericonsdiv{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    text-align: start;
+    gap: 2vw;
+  }
+  #elementformtema{
+    width: auto;
+    height: 2vw;
+    background-color: rgb(20, 20, 20);
+    border: 1px solid rgba(127, 79, 79, 0.5);
+    color:white;
+    padding-left: 0.5vw;
+  }
+  #elementformtema:focus{
+    outline: orange;
+    border-color: orange;
+  }
+  #divformandicon{
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5vw;
+  }
+  .textothers{
+    font-size: 20px;
+  }
+  #spanwithtime{
+    font-size: 17px;
+  }
+  #texttime{
+    font-size: 20px;
+  }
+  #textemail{
+    font-size: 20px;
+  }
+  #spanwithemail{
+    font-size: 17px;
+  }
+  #textphone{
+    font-size: 20px;
+  }
+  #spanwithtel{
+    font-size: 17px;
+  }
+  #divform{
+    display: grid;
+    justify-content: center;
+    gap: 5vh;
+  }
+  #divformfioandemail{
+    display: flex;
+    gap: 5vh;
+  }
+  #divbuttonotprav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #buttonotprav{
+    border: 1px solid rgba(127, 79, 79, 0.5);
+    background-color:rgb(196, 136, 26);
+    border-radius: 30px;
+    font-size: 15px;
+  }
+  #buttonotprav:hover{
+    background-color: rgb(255, 193, 7);
+    transition: 0.4s;
+    cursor: pointer;
+  }
+  #pbuttonotprav{
+    color: white !important;
+    padding-left: 20px;
+    padding-right: 20px;
+  }

@@ -1,0 +1,85 @@
+#header_block{
+  display: flex;
+  justify-content: center;
+}
+.link_header_item{
+  padding: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  color:#F2F4F3;
+  font-size: 22px;
+}
+.link_header_item:hover{
+  text-decoration: underline #F2F4F3;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 10px;
+  transition: 0.7s;
+}
+.header{
+  background-color: #0A0908;
+  margin: 0;
+  padding: 0;
+}
+body{
+  margin: 0;
+  background-color: #F2F4F3;
+  color:#0A0908;
+  padding: 0;
+  font-family: 'Courier New', Courier, monospace;
+}
+img {
+  object-fit: cover;
+}
+.button_menu_dish{
+  background-color: #A9927D;
+  border: 0px;
+  color: #F2F4F3;
+  border-radius: 20px; 
+}
+.button_menu_dish:hover{
+  background-color: #8a7562;
+}
+#footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60px; /* Высота футера, можно настроить под свои нужды */
+  background-color: rgba(242, 244, 243, 0); /* Прозрачный фон */
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* Разместить контент у нижней границы футера */
+}
+
+#footer button {
+  border: 0;
+  background: none;
+}
+
+#footer img {
+  opacity: 1;
+  height: 30px; /* Высота изображения */
+  width: 20px; /* Ширина изображения */
+  margin-bottom: 10px; /* Отступ от нижнего края блока */
+}
+#void_card{
+  background-color: #F2F4F3;
+  border: 0px;
+}
+.card {
+  min-height: 200px; /* Минимальная высота карточки */
+}
+
+.card .row.g-0 {
+  min-height: 100%; /* Минимальная высота строки */
+}
+
+.card .col-md-4 {
+  display: flex;
+  align-items: stretch; /* Убедимся, что колонка тянется по высоте */
+}
+.card img {
+  min-height: 100%; /* Минимальная высота картинки */
+  object-fit: cover; /* Картинка масштабируется по контейнеру */
+  width: 100%; /* Картинка занимает всю ширину */
+}
+

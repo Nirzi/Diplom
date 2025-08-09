@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ресторан</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css_restourant/restourant_main_page.css' %}">
+  <link rel="icon" href="{% static 'img_restourant/free-icon-restaurant-562678.png' %}">
+</head>
+<body>
+  <!-- Шапка сайта -->
+  <header class="header p-3 sticky-top">
+    <!-- Создаём контейнер для удобной верстки -->
+      <div class="container-fluid">
+        <div class="row">
+          <!-- Создаём блок для всех кнопок header -->
+          <div class="text-center col-12">
+            <!-- Кнопка меню для перехода на другую страницу у header -->
+            <a class="link_header_item mx-3 p-2" href="{% url 'menu' %}">Меню</a>
+            <!-- Кнопка напитки для перехода на другую страницу у header -->
+            <a class="link_header_item mx-3 p-2" href="{% url 'drink' %}">Барная карта</a>
+            <!-- Кнопка О нас для перехода на другую страницу у header -->
+            <a class="link_header_item mx-3 p-2" href="{% url 'about' %}">Обращение</a>
+            <a class="link_header_item mx-3 p-2" href="{% url 'rate' %}">Оценить нас</a>
+            <!-- Кнопка Контакты для перехода на другую страницу у header -->
+            <a class="link_header_item mx-3 p-2" href="#footer">Контакты</a>
+          </div>
+        </div>
+      </div>
+  </header>
+  <main>
+    <div class="container-fluid">
+      <div>
+        <div id="restaurant_hero" class="pt-5 row justify_content_beetween">
+          <div id="restaurant_intro" class="col-12 col-lg-4 col-md-12">
+            <h1>Ресторан<br>авторской кухни</h1>
+            <p>Легкая атмосфера, русская и европейская кухня</p>
+          </div>
+          <div class="col-12 col-lg-6 col-md-9" id="block_image_eat">
+            <img src="{% static 'img_restourant/delicious-dish-at-a-restaurant.jpg' %}" alt="блюдо" id="image_eat" class="rounded img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid mt-5 block_prem">
+      <div id="block_t_and_z_prem">
+        <h4 class="zagolovok_prem" id="id_zagolovok_prem">Преимущества</h4>
+        <h2 id="text_prem">Мы предлагаем</h2>
+      </div>
+      <div class="conteiner">
+        <div class="row" id="block_preimushestva">
+            <div class="block_one_prem col-sm-12 col-md-12 col-lg-5">
+              <img src="{% static 'img_restourant/icons/Иконка_кухни.png' %}" class="icons_size" alt="Иконка кухни">
+              <h3 class="text_kitchen cursor_text">Кухня</h3>
+              <p class="font_size_22 color_5E503F cursor_text">Изысканные блюда</p><br>
+              <p class="font_size_16 color_5E503F cursor_text">Наша кухня сочетает в себе лучшие традиции с современными кулинарными техниками. Мы используем только свежие продукты и уникальные рецепты, чтобы каждый ваш визит был незабываемым гастрономическим опытом.</p>
+            </div>
+            <div class="block_one_prem col-sm-12 col-md-12 col-lg-5">
+              <img src="{% static 'img_restourant/icons/Иконка_парковка.png' %}" class="icons_size" alt="Иконка парковки">
+              <h3 class="text_kitchen cursor_text">Парковка</h3>
+              <p class="font_size_22 color_5E503F cursor_text">Удобство и безопасность</p><br>
+              <p class="font_size_16 color_5E503F cursor_text">Мы предоставляем для наших гостей удобную и охраняемую парковку. Вам не нужно беспокоиться о том, где оставить автомобиль — просто наслаждайтесь временем в нашем ресторане.</p>
+            </div>
+            <div class="block_one_prem col-sm-12 col-md-12 col-lg-5" id="block_three_prem">
+              <img src="{% static 'img_restourant/icons/Иконка_террасы.png' %}" class="icons_size" alt="Иконка террасы">
+              <h3 class="text_kitchen cursor_text">Терраса</h3>
+              <p class="font_size_22 color_5E503F cursor_text">Отдых на свежем воздухе</p><br>
+              <p class="font_size_16 color_5E503F cursor_text">Наслаждайтесь уютной атмосферой нашей летней террасы. Здесь можно расслабиться, наслаждаясь блюдами и напитками под открытым небом в окружении природы.</p>
+            </div>
+            <div class="block_one_prem col-sm-12 col-md-12 col-lg-5" id="block_four_prem">
+              <img src="{% static 'img_restourant/icons/Иконка_wifi.png' %}" class="icons_size" alt="Иконка Wi-Fi">
+              <h3 class="text_kitchen cursor_text">Wi-Fi</h3>
+              <p class="font_size_22 color_5E503F cursor_text">Бесплатный доступ в сеть</p><br>
+              <p class="font_size_16 color_5E503F cursor_text">Мы предоставляем бесплатный высокоскоростной Wi-Fi для всех гостей нашего ресторана. Будьте на связи, делитесь своими впечатлениями в соцсетях или работайте удалённо в комфортной обстановке.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container" style="margin-top: 50px; margin-bottom: 100px; text-align: center;">
+      <div class="row" style="display: flex; justify-content: center; margin-left: 3px; margin-right: 3px;">
+        <div>
+          <h2>Забронировать столик</h2>
+        </div>
+        <form action="{% url 'TableReservation_view' %}" method="post" id="form_bron_table" class="col-sm-12 col-md-9 col-lg-6 col-xl-5">
+          {% csrf_token %}
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="form_name" name="form_name" placeholder="Иван">
+            <label for="floatingInput">Имя<span class="color_red">*</span></label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="form_surname" name="form_surname" placeholder="Иванов">
+            <label for="floatingInput">Фамилия<span class="color_red">*</span></label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="form_patronymic" name="form_patronymic" placeholder="иванович">
+            <label for="floatingInput">Отчество<span class="color_red">*</span></label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="form_mail" name="form_mail" placeholder="example@gmail.com">
+            <label for="floatingInput">E-mail</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="tel" class="form-control" id="form_telephone" name="form_telephone" placeholder="+7 (000) 000-00-00">
+            <label for="floatingInput">Телефон<span class="color_red">*</span></label>
+          </div>
+          <div class="form-floating mb-3">
+            <select class="form-control" id="form_table" name="form_table" data-get-dates-url="{% url 'get_available_dates_times' 0 %}" required>
+                <option value="" selected disabled>Выберите столик</option>
+                {% for table in tables %}
+                    <option value="{{ table.id }}">Столик {{ table.number }}</option>
+                {% endfor %}
+            </select>
+            <label for="form_table">Столик<span class="color_red">*</span></label>
+        </div>
+        <div class="form-floating mb-3">
+          <select class="form-control" id="form_date" name="form_date" disabled required>
+              <option value="" selected disabled>Выберите дату</option>
+          </select>
+          <label for="form_date">Дата<span class="color_red">*</span></label>
+      </div>
+      <div class="form-floating mb-3">
+          <select class="form-control" id="form_time" name="form_time" disabled required>
+              <option value="" selected disabled>Выберите время</option>
+          </select>
+          <label for="form_time">Время<span class="color_red">*</span></label>
+      </div>
+          <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="form_number_guest" name="form_number_guest" placeholder="0">
+            <label for="floatingInput">Количество гослей<span class="color_red">*</span></label>
+          </div>
+          <div class="form-floating">
+            <textarea class="form-control" placeholder="Описание" id="floatingTextarea" name="floatingTextarea"></textarea>
+            <label for="floatingTextarea">Описание</label>
+          </div>
+          <div class="form-check" style="text-align: start; margin-top: 10px;">
+            <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" name="flexCheckDefault" required>
+            <label class="form-check-label" for="flexCheckDefault">
+                Я соглашаюсь с политикой конфиденциальности сайта
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary" id="button_submit_bron" style="margin-top:10px;">Отправить</button>
+        </form>
+      </div>
+    </div>
+  </main>
+  <footer id="footer">
+    <div class="container">
+      <div class="row" style="display: flex; justify-content: space-around;">
+        <div class="col-sm-12 col-md-6 col-lg-6 text-center mt-4 pb-3">
+          <h4>Время работы</h4>
+          <p>Понедельник-Пятница: с 9:00 до 21:00<br>
+            Суббота: с 10:00 до 20:00<br>
+            Воскресенье: с 10:00 до 18:00</p>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6 text-center mt-4 pb-3">
+          <h4>Контакты</h4>
+          <p>+7 (995) 792-67-95<br>+7 (986) 792-67-95<br>nirzzii@mail.ru</p>
+          <a href="https://t.me/nirzzii"><img src="{% static 'img_restourant/icons/Иконка_телеграм.png' %}" alt="телеграм" height="40px"  width="40px"></a>
+        </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  {% if success %}
+  <script>
+      alert("{{ success }}");
+  </script>
+  {% endif %}
+
+  {% if error %}
+  <div class="alert alert-danger">
+      {{ error }}
+  </div>
+  {% endif %}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="{% static 'js_restourant/restourant_main_page.js' %}"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+        document.getElementById('form_table').addEventListener('change', function() {
+            let tableId = this.value;
+            let dateSelect = document.getElementById('form_date');
+            let timeSelect = document.getElementById('form_time');
+  
+            if (tableId) {
+                fetch(`/get-available-dates-times/${tableId}/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.available_dates_times && Object.keys(data.available_dates_times).length > 0) {
+                            // Очищаем текущие опции
+                            dateSelect.innerHTML = '<option value="" selected disabled>Выберите дату</option>';
+                            timeSelect.innerHTML = '<option value="" selected disabled>Выберите время</option>';
+                            timeSelect.disabled = true;
+  
+                            // Заполняем доступные даты
+                            Object.keys(data.available_dates_times).forEach(function(date) {
+                                let option = document.createElement('option');
+                                option.value = date;
+                                option.text = date;
+                                dateSelect.appendChild(option);
+                            });
+                            dateSelect.disabled = false;
+                        } else {
+                            dateSelect.disabled = true;
+                            timeSelect.disabled = true;
+                            alert('Нет доступных дат для выбранного столика.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Ошибка при загрузке доступных дат и времени:', error);
+                    });
+            } else {
+                dateSelect.disabled = true;
+                timeSelect.disabled = true;
+            }
+        });
+  
+        // Обработчик для изменения даты
+        document.getElementById('form_date').addEventListener('change', function() {
+            let selectedDate = this.value;
+            let tableId = document.getElementById('form_table').value;
+            let timeSelect = document.getElementById('form_time');
+  
+            if (selectedDate && tableId) {
+                fetch(`/get-available-dates-times/${tableId}/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.available_dates_times && data.available_dates_times[selectedDate]) {
+                            // Очищаем текущие опции
+                            timeSelect.innerHTML = '<option value="" selected disabled>Выберите время</option>';
+  
+                            // Заполняем доступные времена
+                            data.available_dates_times[selectedDate].forEach(function(time) {
+                                let option = document.createElement('option');
+                                option.value = time;
+                                option.text = time;
+                                timeSelect.appendChild(option);
+                            });
+                            timeSelect.disabled = false;
+                        } else {
+                            timeSelect.disabled = true;
+                            alert('Нет доступного времени для выбранной даты.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Ошибка при загрузке доступного времени:', error);
+                    });
+            } else {
+                timeSelect.disabled = true;
+            }
+        });
+    })
+      </script>
+</body>
+</html>

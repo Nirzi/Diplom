@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оценка ресторана</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: flex; 
+            flex-direction: column; 
+            background-color: #F2F4F3;
+            color: #0A0908;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        #content-wrap {
+            flex: 1; 
+        }
+        #header_block {
+            display: flex;
+            justify-content: center;
+        }
+        .link_header_item {
+            padding: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            color: #F2F4F3;
+            font-size: 22px;
+        }
+        .link_header_item:hover {
+            text-decoration: underline #F2F4F3;
+            text-decoration-thickness: 1.5px;
+            text-underline-offset: 10px;
+            transition: 0.7s;
+        }
+        .header {
+            background-color: #0A0908;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .star-rating {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            font-size: 2rem;
+            color: #ccc;
+            cursor: pointer;
+        }
+        .star-rating .star {
+            transition: color 0.3s ease;
+        }
+        .star-rating .star.selected,
+        .star-rating .star.hover {
+            color: #ffc107;
+        }
+        .btn {
+            display: block;
+            margin: 20px auto;
+        }
+        .overall-score {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    {% load static %}
+
+    <header class="header p-3 sticky-top" id="header">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="text-center col-12">
+                  <a class="link_header_item mx-3 p-2" href="{% url 'home' %}">Главная</a>
+                  <a class="link_header_item mx-3 p-2" href="{% url 'menu' %}">Меню</a>
+                  <a class="link_header_item mx-3 p-2" href="{% url 'drink' %}">Барная карта</a>
+                  <a class="link_header_item mx-3 p-2" href="{% url 'about' %}">Обращение</a>
+              </div>
+          </div>
+      </div>
+    </header>
+
+    <div id="content-wrap">
+      <div class="container">
+        <h1 class="text-center">Оцените наш ресторан</h1>
+        <form id="rating-form" class="text-center" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Оценка еды:</label>
+                <div class="star-rating" data-rating="food">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <input type="hidden" id="food-rating" name="food_rating" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Оценка обслуживания:</label>
+                <div class="star-rating" data-rating="service">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <input type="hidden" id="service-rating" name="service_rating" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Оценка атмосферы:</label>
+              <div class="star-rating" data-rating="atmosphere">
+                  <span class="star" data-value="1">★</span>
+                  <span class="star" data-value="2">★</span>
+                  <span class="star" data-value="3">★</span>
+                  <span class="star" data-value="4">★</span>
+                  <span class="star" data-value="5">★</span>
+              </div>
+              <input type="hidden" id="atmosphere-rating" name="atmosphere_rating" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Отправить</button>
+        </form>
+
+        <div class="overall-score">
+            <h2>Общая оценка:</h2>
+            <p id="overall-score">-</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+        // Обработчик для звездного рейтинга
+        $('.star-rating .star').on('mouseover', function () {
+            const parent = $(this).parent();
+            parent.children('.star').removeClass('hover');
+            $(this).addClass('hover').prevAll().addClass('hover');
+        });
+
+        $('.star-rating').on('mouseleave', function () {
+            $(this).children('.star').removeClass('hover');
+        });
+
+        $('.star-rating .star').on('click', function () {
+            const parent = $(this).parent();
+            const value = $(this).data('value');
+
+            // Устанавливаем выбранные звезды
+            parent.children('.star').removeClass('selected');
+            $(this).addClass('selected').prevAll().addClass('selected');
+
+            // Устанавливаем значение в скрытое поле
+            const ratingType = parent.data('rating');
+            $(`#${ratingType}-rating`).val(value);
+        });
+
+        // Обработка отправки формы
+        $('#rating-form').on('submit', function (event) {
+            event.preventDefault();
+
+            // Get the values from the hidden input fields
+            const foodRating = parseInt($('#food-rating').val());
+            const serviceRating = parseInt($('#service-rating').val());
+            const atmosphereRating = parseInt($('#atmosphere-rating').val());
+
+            // Check if all ratings are selected
+            if (isNaN(foodRating) || isNaN(serviceRating) || isNaN(atmosphereRating)) {
+                alert('Пожалуйста, оцените все категории.');
+                return;
+            }
+
+            const overallAverage = (foodRating + serviceRating + atmosphereRating) / 3;
+
+            $('#overall-score').text(overallAverage.toFixed(1));
+        });
+    </script>
+
+    <div class="container-fluid mt-5" style="background-color: #0A0908; color:#F2F4F3;" id="div_footer">
+      <div class="row" style="display: flex; justify-content: space-around;">
+        <div class="col-sm-12 col-md-6 col-lg-6 text-center mt-4 pb-3">
+          <h4>Время работы</h4>
+          <p>Понедельник-Пятница: с 9:00 до 21:00<br>
+            Суббота: с 10:00 до 20:00<br>
+            Воскресенье: с 10:00 до 18:00</p>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6 text-center mt-4 pb-3" style="margin-bottom: 50px;">
+          <h4>Контакты</h4>
+          <p>+7 (995) 792-67-95<br>+7 (986) 792-67-95<br>nirzzii@mail.ru</p>
+          <a href="https://t.me/nirzzii"><img src="{% static 'img_restourant/icons/Иконка_телеграм.png' %}" alt="телеграм" height="40px"  width="40px"></a>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

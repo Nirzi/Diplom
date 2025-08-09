@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #F2F4F3;
+            color: #0A0908;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background-color: #0A0908;
+            color: #F2F4F3;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .form-label {
+            color: #F2F4F3;
+        }
+        .btn-custom {
+            background-color: #ffc107;
+            color: #0A0908;
+            border: none;
+            width: 100%;
+            padding: 10px;
+            font-weight: bold;
+        }
+        .btn-custom:hover {
+            background-color: #e0a800;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Вход</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_username" class="form-label">Имя пользователя:</label>
+                {{ form.username }}
+            </div>
+            <div class="mb-3">
+                <label for="id_password" class="form-label">Пароль:</label>
+                {{ form.password }}
+            </div>
+            <button type="submit" class="btn btn-custom mt-3">Войти</button>
+            <p class="text-center mt-3">
+                <a href="{% url 'password_reset' %}" class="text-decoration-none" style="color: #F2F4F3;">Забыли пароль?</a>
+            </p>
+        </form>
+    </div>
+</body>
+</html>

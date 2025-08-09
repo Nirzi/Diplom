@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Меню</title>
+    {% load static %}
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static "css_restourant/restourant_menu.css" %}"/>
+    <link rel="icon" href="{% static 'img_restourant/free-icon-restaurant-562678.png' %}">
+    <style>
+      .button_card_detail{
+        background-color: #A9927D;
+        border: 0px;
+        color: #F2F4F3;
+        border-radius: 5px; 
+      }
+      .button_card_detail:hover{
+        background-color: #8a7562;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Шапка сайта -->
+    <header class="header p-3 sticky-top" id="header">
+      <!-- Создаём контейнер для удобной верстки -->
+      <div class="container-fluid">
+        <div class="row">
+          <!-- Создаём блок для всех кнопок header -->
+          <div class="text-center col-12">
+            <!-- Кнопка меню для перехода на другую страницу у header -->
+            <a
+              class="link_header_item mx-3 p-2"
+              href="{% url 'home' %}"
+              >Главная</a
+            >
+            <!-- Кнопка напитки для перехода на другую страницу у header -->
+            <a class="link_header_item mx-3 p-2" href="{% url 'drink' %}">Барная карта</a>
+            <!-- Кнопка О нас для перехода на другую страницу у header -->
+            <a class="link_header_item mx-3 p-2" href="{% url 'about' %}"
+              >Обращение</a
+            >
+            <a class="link_header_item mx-3 p-2" href="{% url 'rate' %}">Оценить нас</a>
+            <!-- Кнопка Контакты для перехода на другую страницу у header -->
+            <a class="link_header_item mx-3 p-2" href="#div_footer">Контакты</a
+            >
+          </div>
+        </div>
+      </div>
+    </header>
+
+
+    {% comment %}  {% endcomment %}
+    {% comment %}  {% endcomment %}
+    {% comment %}  {% endcomment %}
+    {% comment %}  {% endcomment %}
+    {% comment %}  {% endcomment %}
+
+    {% comment %} Для пасты карбонара {% endcomment %}
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample_pasta_carbonara" aria-labelledby="offcanvasExampleLabel_pasta_carbonara">
+      <div class="offcanvas-header">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div><img id="image_container_pasta_carbonara"></div>
+        <br>
+        <h4>Ингридиенты</h4>
+        <ul id="spisok_pasta_carbonara"></ul>
+        <h4>БЖУ</h4>
+        <ul id="Protein_Fat_Carbs_pasta_carbonara"></ul>
+        <h4>Колирии и масса</h4>
+        <ul id="Calories_weight_pasta_carbonara"></ul>
+      </div>
+    </div>
+
+    {% comment %} Для пасты с креветками {% endcomment %}
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample_pasta_shrimp" aria-labelledby="offcanvasExampleLabel_pasta_shrimp">
+      <div class="offcanvas-header">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div><img id="image_container_pasta_shrimp"></div>
+        <br>
+        <h4>Ингридиенты</h4>
+        <ul id="spisok_pasta_shrimp"></ul>
+        <h4>БЖУ</h4>
+        <ul id="Protein_Fat_Carbs_pasta_shrimp"></ul>
+        <h4>Колирии и масса</h4>
+        <ul id="Calories_weight_pasta_shrimp"></ul>
+      </div>
+    </div>
+
+    {% comment %} Для Тальятелле с уткой {% endcomment %}
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample_pasta_duck" aria-labelledby="offcanvasExampleLabel_pasta_duck">
+      <div class="offcanvas-header">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div><img id="image_container_pasta_duck"></div>
+        <br>
+        <h4>Ингридиенты</h4>
+        <ul id="spisok_pasta_duck"></ul>
+        <h4>БЖУ</h4>
+        <ul id="Protein_Fat_Carbs_pasta_duck"></ul>
+        <h4>Колирии и масса</h4>
+        <ul id="Calories_weight_pasta_duck"></ul>
+      </div>
+    </div>
+
+    {% comment %} Для Тальятелле с циплёнком {% endcomment %}
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample_pasta_chicken" aria-labelledby="offcanvasExampleLabel_pasta_chicken">
+      <div class="offcanvas-header">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div><img id="image_container_pasta_chicken"></div>
+        <br>
+        <h4>Ингридиенты</h4>
+        <ul id="spisok_pasta_chicken"></ul>
+        <h4>БЖУ</h4>
+        <ul id="Protein_Fat_Carbs_pasta_chicken"></ul>
+        <h4>Колирии и масса</h4>
+        <ul id="Calories_weight_pasta_chicken"></ul>
+      </div>
+    </div>
+
+    {% comment %} Для Цезаря с курицей {% endcomment %}
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample_salad_caesar" aria-labelledby="offcanvasExampleLabel_salad_caesar">
+      <div class="offcanvas-header">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div><img id="image_container_salad_caesar"></div>
+        <br>
+        <h4>Ингридиенты</h4>
+        <ul id="spisok_salad_caesar"></ul>
+        <h4>БЖУ</h4>
+        <ul id="Protein_Fat_Carbs_salad_caesar"></ul>
+        <h4>Колирии и масса</h4>
+        <ul id="Calories_weight_salad_caesar"></ul>
+      </div>
+    </div>
+
+    {% comment %} Для Цезаря с креветками {% endcomment %}
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample_caesar_shrimp" aria-labelledby="offcanvasExampleLabel_caesar_shrimp">
+      <div class="offcanvas-header">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div><img id="image_container_caesar_shrimp"></div>
+        <br>
+        <h4>Ингридиенты</h4>
+        <ul id="spisok_caesar_shrimp"></ul>
+        <h4>БЖУ</h4>
+        <ul id="Protein_Fat_Carbs_caesar_shrimp"></ul>
+        <h4>Колирии и масса</h4>
+        <ul id="Calories_weight_caesar_shrimp"></ul>
+      </div>
+    </div>
+
+    {% comment %} Для Греческого салата {% endcomment %}
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample_greek_salad" aria-labelledby="offcanvasExampleLabel_greek_salad">
+      <div class="offcanvas-header">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div><img id="image_container_greek_salad"></div>
+        <br>
+        <h4>Ингридиенты</h4>
+        <ul id="spisok_greek_salad"></ul>
+        <h4>БЖУ</h4>
+        <ul id="Protein_Fat_Carbs_greek_salad"></ul>
+        <h4>Колирии и масса</h4>
+        <ul id="Calories_weight_greek_salad"></ul>
+      </div>
+    </div>
+
+    {% comment %} Для Салата с лососем {% endcomment %}
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample_salad_salmon" aria-labelledby="offcanvasExampleLabel_salad_salmon">
+      <div class="offcanvas-header">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div><img id="image_container_salad_salmon"></div>
+        <br>
+        <h4>Ингридиенты</h4>
+        <ul id="spisok_salad_salmon"></ul>
+        <h4>БЖУ</h4>
+        <ul id="Protein_Fat_Carbs_salad_salmon"></ul>
+        <h4>Колирии и масса</h4>
+        <ul id="Calories_weight_salad_salmon"></ul>
+      </div>
+    </div>
+
+    {% comment %} Для Борща с говядиной {% endcomment %}
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample_borsch_beef" aria-labelledby="offcanvasExampleLabel_borsch_beef">
+      <div class="offcanvas-header">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div><img id="image_container_borsch_beef"></div>
+        <br>
+        <h4>Ингридиенты</h4>
+        <ul id="spisok_borsch_beef"></ul>
+        <h4>БЖУ</h4>
+        <ul id="Protein_Fat_Carbs_borsch_beef"></ul>
+        <h4>Колирии и масса</h4>
+        <ul id="Calories_weight_borsch_beef"></ul>
+      </div>
+    </div>
+
+    {% comment %} Для Грибной крем суп {% endcomment %}
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample_mushroom_cream_sup" aria-labelledby="offcanvasExampleLabel_mushroom_cream_sup">
+      <div class="offcanvas-header">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div><img id="image_container_mushroom_cream_sup"></div>
+        <br>
+        <h4>Ингридиенты</h4>
+        <ul id="spisok_mushroom_cream_sup"></ul>
+        <h4>БЖУ</h4>
+        <ul id="Protein_Fat_Carbs_mushroom_cream_sup"></ul>
+        <h4>Колирии и масса</h4>
+        <ul id="Calories_weight_mushroom_cream_sup"></ul>
+      </div>
+    </div>
+
+    {% comment %} Для Лохикейло {% endcomment %}
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample_lohikeitto_sup" aria-labelledby="offcanvasExampleLabel_lohikeitto_sup">
+      <div class="offcanvas-header">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div><img id="image_container_lohikeitto_sup"></div>
+        <br>
+        <h4>Ингридиенты</h4>
+        <ul id="spisok_lohikeitto_sup"></ul>
+        <h4>БЖУ</h4>
+        <ul id="Protein_Fat_Carbs_lohikeitto_sup"></ul>
+        <h4>Колирии и масса</h4>
+        <ul id="Calories_weight_lohikeitto_sup"></ul>
+      </div>
+    </div>
+
+    {% comment %} Для Том ям {% endcomment %}
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample_tom_yam_sup" aria-labelledby="offcanvasExampleLabel_tom_yam_sup">
+      <div class="offcanvas-header">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div><img id="image_container_tom_yam_sup"></div>
+        <br>
+        <h4>Ингридиенты</h4>
+        <ul id="spisok_tom_yam_sup"></ul>
+        <h4>БЖУ</h4>
+        <ul id="Protein_Fat_Carbs_tom_yam_sup"></ul>
+        <h4>Колирии и масса</h4>
+        <ul id="Calories_weight_tom_yam_sup"></ul>
+      </div>
+    </div>
+
+    {% comment %} Для Тыквенного супа {% endcomment %}
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample_pumpkin_cream_soup" aria-labelledby="offcanvasExampleLabel_pumpkin_cream_soup">
+      <div class="offcanvas-header">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div><img id="image_container_pumpkin_cream_soup"></div>
+        <br>
+        <h4>Ингридиенты</h4>
+        <ul id="spisok_pumpkin_cream_soup"></ul>
+        <h4>БЖУ</h4>
+        <ul id="Protein_Fat_Carbs_pumpkin_cream_soup"></ul>
+        <h4>Колирии и масса</h4>
+        <ul id="Calories_weight_pumpkin_cream_soup"></ul>
+      </div>
+    </div>
+    {% comment %}  {% endcomment %}
+    {% comment %}  {% endcomment %}
+    {% comment %}  {% endcomment %}
+    {% comment %}  {% endcomment %}
+    {% comment %}  {% endcomment %}
+    {% comment %}  {% endcomment %}
+    {% comment %}  {% endcomment %}
+    
+
+    <main>
+      {% comment %} Панель навигации {% endcomment %}
+      <div class="container mt-3" id="main_block">
+        <div class="row d-flex justify-content-center">
+          <div class="col-auto mt-2">
+            {% comment %} Кнопка для перелистывания на блок с пастами {% endcomment %}
+            <a href="#block_with_pasta" class="me-2">
+              <button type="button" class="btn btn-primary button_menu_dish" id="button_pasta" style="width: 100px;">
+                Паста
+              </button></a
+            >
+          </div>
+          <div class="col-auto mt-2">
+            {% comment %} Кнопка для перелистывания на блок с салатами {% endcomment %}
+            <a href="#block_with_salad" class="me-2">
+              <button type="button" class="btn btn-primary button_menu_dish" id="button_pasta" style="width: 100px;">
+                Салаты
+              </button></a
+            >
+          </div>
+          <div class="col-auto mt-2">
+            {% comment %} Кнопка для перелистывания на блок с супами {% endcomment %}
+            <a href="#block_with_sup" class="me-2">
+              <button type="button" class="btn btn-primary button_menu_dish" id="button_pasta" style="width: 100px;">
+                Супы
+              </button></a
+            >
+          </div>
+          {% comment %} <div class="col-auto mt-2"> {% endcomment %}
+            {% comment %} Кнопка для перелистывания на блок с мясом {% endcomment %}
+            {% comment %} <a href="#block_with_meet" class="me-2">
+              <button type="button" class="btn btn-primary button_menu_dish" id="button_pasta" style="width: 100px;">
+                Мясо
+              </button></a
+            >
+          </div> {% endcomment %}
+        </div>
+      </div>
+      {% comment %} Общий контейнер для всем карточек {% endcomment %}
+      <div class="container">
+        {% comment %} Блок для со всеми карточками Паста {% endcomment %}
+        <div
+          class="row px-2 mt-5" id="block_with_pasta"
+          style="display: flex; justify-content: space-around; margin-top: 20px"
+        >
+          <h2>Паста</h2>
+          {% comment %} Карточка для паста карбонара {% endcomment %}
+          <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  id="image_pasta_carbonara"
+                  class="img-fluid rounded-start w-100 h-100"
+                  style="object-fit: cover"
+                  alt="Паста карбонара"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight: bold">
+                    Паста карбонара
+                  </h5>
+                  <p class="card-text">
+                    Классическое итальянское блюдо с беконом.
+                  </p>
+                  <p class="card-text" style="font-weight: bold">
+                    <small style="font-size: 20px" class="text-body-secondary"
+                      >400 рублей</small
+                    >
+                  </p>
+                  <button class="btn btn-primary button_card_detail" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample_pasta_carbonara" aria-controls="offcanvasExample_pasta_carbonara">
+                    Подробнее
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% comment %} Карточка для паста с креветками {% endcomment %}
+          <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  id="image_pasta_shrimp"
+                  class="img-fluid rounded-start w-100 h-100"
+                  style="object-fit: cover"
+                  alt="Паста с креветками"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight: bold">
+                    Паста с креветками
+                  </h5>
+                  <p class="card-text">
+                    Сливочная паста с сочными креветками.
+                  </p>
+                  <p class="card-text" style="font-weight: bold">
+                    <small style="font-size: 20px" class="text-body-secondary"
+                      >595 рублей</small
+                    >
+                  </p>
+                  <button class="btn btn-primary button_card_detail" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample_pasta_shrimp" aria-controls="offcanvasExample_pasta_shrimp">
+                    Подробнее
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% comment %} Карточка с тальятелле с уткой {% endcomment %}
+          <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  id="image_pasta_duck"
+                  class="img-fluid rounded-start w-100 h-100"
+                  style="object-fit: cover"
+                  alt="Тальятелле с уткой"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight: bold">
+                    Тальятелле с уткой
+                  </h5>
+                  <p class="card-text">
+                    Паста с уткой в ароматном соусе.
+                  </p>
+                  <p class="card-text" style="font-weight: bold">
+                    <small style="font-size: 20px" class="text-body-secondary"
+                      >595 рублей</small
+                    >
+                  </p>
+                  <button class="btn btn-primary button_card_detail" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample_pasta_duck" aria-controls="offcanvasExample_pasta_duck">
+                    Подробнее
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% comment %} Карточка с тальятелле с ципленком {% endcomment %}
+          <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  id="image_pasta_chicken"
+                  class="img-fluid rounded-start w-100 h-100"
+                  style="object-fit: cover"
+                  alt="Тальятелле с цыпленком"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight: bold">
+                    Тальятелле с цыпленком
+                  </h5>
+                  <p class="card-text">
+                    Нежная паста с куриным филе.
+                  </p>
+                  <p class="card-text" style="font-weight: bold">
+                    <small style="font-size: 20px" class="text-body-secondary"
+                      >420 рублей</small
+                    >
+                  </p>
+                  <button class="btn btn-primary button_card_detail" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample_pasta_chicken" aria-controls="offcanvasExample_pasta_chicken">
+                    Подробнее
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% comment %} Блок с со всеми карточками Салат {% endcomment %}
+        <div
+          class="row mt-5" id="block_with_salad"
+          style="display: flex; justify-content: space-around; margin-top: 20px"
+        >
+          <h2>Салаты</h2>
+          {% comment %} Карточка для салата цезарь {% endcomment %}
+          <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  id="image_salad_caesar"
+                  class="img-fluid rounded-start w-100 h-100"
+                  style="object-fit: cover"
+                  alt="Салат цезарь"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight: bold">
+                    Салат цезарь
+                  </h5>
+                  <p class="card-text">
+                    Популярный салат с курицей и сыром.
+                  </p>
+                  <p class="card-text" style="font-weight: bold">
+                    <small style="font-size: 20px" class="text-body-secondary"
+                      >375 рублей</small
+                    >
+                  </p>
+                  <button class="btn btn-primary button_card_detail" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample_salad_caesar" aria-controls="offcanvasExample_salad_caesar">
+                    Подробнее
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% comment %} Карточка для салат цезарь с креветками {% endcomment %}
+          <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  id="image_caesar_shrimp"
+                  class="img-fluid rounded-start w-100 h-100"
+                  style="object-fit: cover"
+                  alt="Цезарь с креветками"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight: bold">
+                    Цезарь с креветками
+                  </h5>
+                  <p class="card-text">
+                    Вариант салата с креветками и соусом.
+                  </p>
+                  <p class="card-text" style="font-weight: bold">
+                    <small style="font-size: 20px" class="text-body-secondary"
+                      >505 рублей</small
+                    >
+                  </p>
+                  <button class="btn btn-primary button_card_detail" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample_caesar_shrimp" aria-controls="offcanvasExample_caesar_shrimp">
+                    Подробнее
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% comment %} Карточка для салат греческий {% endcomment %}
+          <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  id="image_greek_salad"
+                  class="img-fluid rounded-start w-100 h-100"
+                  style="object-fit: cover"
+                  alt="Салат греческий"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight: bold">
+                    Салат греческий
+                  </h5>
+                  <p class="card-text">
+                    Лёгкий овощной салат с сыром фета.
+                  </p>
+                  <p class="card-text" style="font-weight: bold">
+                    <small style="font-size: 20px" class="text-body-secondary"
+                      >305 рублей</small
+                    >
+                  </p>
+                  <button class="btn btn-primary button_card_detail" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample_greek_salad" aria-controls="offcanvasExample_greek_salad">
+                    Подробнее
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% comment %} Карточчка для салат с лососем и яблоком {% endcomment %}
+          <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  id="image_salad_salmon"
+                  class="img-fluid rounded-start w-100 h-100"
+                  style="object-fit: cover"
+                  alt="Салат с лососем и яблоком"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight: bold">
+                    Салат с лососем и яблоков
+                  </h5>
+                  <p class="card-text">
+                    Лосось с яблоками в свежем салате.
+                  </p>
+                  <p class="card-text" style="font-weight: bold">
+                    <small style="font-size: 20px" class="text-body-secondary"
+                      >535 рублей</small
+                    >
+                  </p>
+                  <button class="btn btn-primary button_card_detail" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample_salad_salmon" aria-controls="offcanvasExample_salad_salmon">
+                    Подробнее
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% comment %} Блок со всеми карточками Суп {% endcomment %}
+        <div
+          class="row mt-5" id="block_with_sup"
+          style="display: flex; justify-content: space-around; margin-top: 20px"
+        >
+          <h2>Супы</h2>
+          {% comment %} Карточка для борщ с томлённой говядиной {% endcomment %}
+          <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  id="image_borsch_beef"
+                  class="img-fluid rounded-start w-100 h-100"
+                  style="object-fit: cover"
+                  alt="Борщ с томлённой говядиной"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight: bold">
+                    Борщ с томлённой говядиной
+                  </h5>
+                  <p class="card-text">
+                    Традиционный суп с говядиной и свёклой.
+                  </p>
+                  <p class="card-text" style="font-weight: bold">
+                    <small style="font-size: 20px" class="text-body-secondary"
+                      >465 рублей</small
+                    >
+                  </p>
+                  <button class="btn btn-primary button_card_detail" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample_borsch_beef" aria-controls="offcanvasExample_borsch_beef">
+                    Подробнее
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% comment %} Карточка для грибной крем суп {% endcomment %}
+          <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  id="image_mushroom_cream_sup"
+                  class="img-fluid rounded-start w-100 h-100"
+                  style="object-fit: cover"
+                  alt="Грибной крем-суп"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight: bold">
+                    Грибной крем суп
+                  </h5>
+                  <p class="card-text">
+                    Очень нежный крем-суп с грибами.
+                  </p>
+                  <p class="card-text" style="font-weight: bold">
+                    <small style="font-size: 20px" class="text-body-secondary"
+                      >355 рублей</small
+                    >
+                  </p>
+                  <button class="btn btn-primary button_card_detail" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample_mushroom_cream_sup" aria-controls="offcanvasExample_mushroom_cream_sup">
+                    Подробнее
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% comment %} Карточка для Лохикейто {% endcomment %}
+          <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  id="image_lohikeitto_sup"
+                  class="img-fluid rounded-start w-100 h-100"
+                  style="object-fit: cover"
+                  alt="Лохикейто(финская уха)"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight: bold">
+                    Лохикейто(финская уха)
+                  </h5>
+                  <p class="card-text">
+                    Финский суп с лососем и сливками.
+                  </p>
+                  <p class="card-text" style="font-weight: bold">
+                    <small style="font-size: 20px" class="text-body-secondary"
+                      >705 рублей</small
+                    >
+                  </p>
+                  <button class="btn btn-primary button_card_detail" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample_lohikeitto_sup" aria-controls="offcanvasExample_lohikeitto_sup">
+                    Подробнее
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% comment %} Карточка для Том ям {% endcomment %}
+          <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  id="image_tom_yam_sup"
+                  class="img-fluid rounded-start w-100 h-100"
+                  style="object-fit: cover"
+                  alt="Том ям"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight: bold">
+                    Том ям
+                  </h5>
+                  <p class="card-text">
+                    Тайский суп с креветками и специями.
+                  </p>
+                  <p class="card-text" style="font-weight: bold">
+                    <small style="font-size: 20px" class="text-body-secondary"
+                      >635 рублей</small
+                    >
+                  </p>
+                  <button class="btn btn-primary button_card_detail" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample_tom_yam_sup" aria-controls="offcanvasExample_tom_yam_sup">
+                    Подробнее
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% comment %} Карточка для тыквенный крем суп {% endcomment %}
+          <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  id="image_pumpkin_cream_soup"
+                  class="img-fluid rounded-start w-100 h-100"
+                  style="object-fit: cover"
+                  alt="Тыквенный крем-суп"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight: bold">
+                    Тыквенный крем-суп
+                  </h5>
+                  <p class="card-text">
+                    Нежный суп из тыквы со сливками.
+                  </p>
+                  <p class="card-text" style="font-weight: bold">
+                    <small style="font-size: 20px" class="text-body-secondary"
+                      >335 рублей</small
+                    >
+                  </p>
+                  <button class="btn btn-primary button_card_detail" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample_pumpkin_cream_soup" aria-controls="offcanvasExample_pumpkin_cream_soup">
+                    Подробнее
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card mb-3" style="max-width: 540px" id="void_card">
+            
+          </div>
+        </div>
+        {% comment %} Блок со всеми карточками Мясо {% endcomment %}
+        {% comment %} <div
+          class="row mt-5" id="block_with_meet"
+          style="display: flex; justify-content: space-around; margin-top: 20px"
+        >
+          <h2>Мясо</h2> {% endcomment %}
+          {% comment %} Карточка для горячая сковородка с телятиной {% endcomment %}
+          {% comment %} <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  src="{% static 'img_restourant/фото с мясом/Горячая сковородка с телятиной.avif' %}"
+                  class="img-fluid rounded-start w-100 h-100"
+                  style="object-fit: cover"
+                  alt="Горячая сковородка с телятиной"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight: bold">
+                    Горячая сковородка с телятиной
+                  </h5>
+                  <p class="card-text">
+                    Телятина на сковороде с овощами.
+                  </p>
+                  <p class="card-text" style="font-weight: bold">
+                    <small style="font-size: 20px" class="text-body-secondary"
+                      >625 рублей</small
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div> {% endcomment %}
+          {% comment %} Карточка для горячая сковородка со свининой {% endcomment %}
+          {% comment %} <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  src="{% static 'img_restourant/фото с мясом/Горячая сковородка со свининой.avif' %}"
+                  class="img-fluid rounded-start w-100 h-100"
+                  style="object-fit: cover"
+                  alt="горячая сковородка со свининой"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight: bold">
+                    Горячая сковородка со свининой
+                  </h5>
+                  <p class="card-text">
+                    Свинина с гарниром на горячей сковороде.
+                  </p>
+                  <p class="card-text" style="font-weight: bold">
+                    <small style="font-size: 20px" class="text-body-secondary"
+                      >605 рублей</small
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div> {% endcomment %}
+          {% comment %} Карточка для Медальоны из вырезки(свинина) {% endcomment %}
+          {% comment %} <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  src="{% static 'img_restourant/фото с мясом/Медальоны из вырезки(свинина).avif' %}"
+                  class="img-fluid rounded-start w-100 h-100"
+                  style="object-fit: cover"
+                  alt="Медальоны из вырезки(свинина)"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight: bold">
+                    Медальоны из вырезки(свинина)
+                  </h5>
+                  <p class="card-text">
+                    Нежные медальоны из свиной вырезки.
+                  </p>
+                  <p class="card-text" style="font-weight: bold">
+                    <small style="font-size: 20px" class="text-body-secondary"
+                      >555 рублей</small
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div> {% endcomment %}
+          {% comment %} Карточка для свиная рулька {% endcomment %}
+          {% comment %} <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  src="{% static 'img_restourant/фото с мясом/Свиная рулька.avif' %}"
+                  class="img-fluid rounded-start w-100 h-100"
+                  style="object-fit: cover"
+                  alt="Свиная рулька"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight: bold">
+                    Свиная рулька
+                  </h5>
+                  <p class="card-text">
+                    Сочное блюдо с большой свиной рулькой.
+                  </p>
+                  <p class="card-text" style="font-weight: bold">
+                    <small style="font-size: 20px" class="text-body-secondary"
+                      >935 рублей</small
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div> {% endcomment %}
+          {% comment %} Карточка для свиные рёбра в печёночном соусе {% endcomment %}
+          {% comment %} <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  src="{% static 'img_restourant/фото с мясом/свиные рёбра в печёночном соусе.avif' %}"
+                  class="img-fluid rounded-start w-100 h-100"
+                  style="object-fit: cover"
+                  alt="Свиные рёбра в печёночном соусе"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight: bold">
+                    Свиные рёбра в перечном соусе
+                  </h5>
+                  <p class="card-text">
+                    Рёбра с пикантным перечным соусом.
+                  </p>
+                  <p class="card-text" style="font-weight: bold">
+                    <small style="font-size: 20px" class="text-body-secondary"
+                      >595 рублей</small
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div> {% endcomment %}
+          {% comment %} Карточка для свиные рёбра в соусе барбекю {% endcomment %}
+          {% comment %} <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  src="{% static 'img_restourant/фото с мясом/Свиные рёбра в соусе барбекю.avif' %}"
+                  class="img-fluid rounded-start w-100 h-100"
+                  style="object-fit: cover"
+                  alt="Свиные ребра в соусе барбекю"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight: bold">
+                    Свиные ребра в соусе барбекю
+                  </h5>
+                  <p class="card-text">
+                    Рёбра в ароматном соусе барбекю.
+                  </p>
+                  <p class="card-text" style="font-weight: bold">
+                    <small style="font-size: 20px" class="text-body-secondary"
+                      >545 рублей</small
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div> {% endcomment %}
+        </div>
+      </div>
+    </main>
+
+    <div class="container-fluid mt-5" style="background-color: #0A0908; color:#F2F4F3;" id="div_footer">
+      <div class="row" style="display: flex; justify-content: space-around;">
+        <div class="col-sm-12 col-md-6 col-lg-6 text-center mt-4 pb-3">
+          <h4>Время работы</h4>
+          <p>Понедельник-Пятница: с 9:00 до 21:00<br>
+            Суббота: с 10:00 до 20:00<br>
+            Воскресенье: с 10:00 до 18:00</p>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6 text-center mt-4 pb-3" style="margin-bottom: 50px;">
+          <h4>Контакты</h4>
+          <p>+7 (995) 792-67-95<br>+7 (986) 792-67-95<br>nirzzii@mail.ru</p>
+          <a href="https://t.me/nirzzii"><img src="{% static 'img_restourant/icons/Иконка_телеграм.png' %}" alt="телеграм" height="40px"  width="40px"></a>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="sticky-bottom" id="footer">
+      <a href="#main_block">
+        <button style="border: 0px;">
+          <img src="{% static 'img_restourant/icons/Иконка_вверх.png' %}" alt="Иконка вверх" height="30px" width="20px" style="opacity: 1 !important;">
+        </button>
+      </a>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      {% comment %} Функция для перевода слов {% endcomment %}
+      const translationDictionary = {
+      "bacon": "Бекон",
+      "applewood-smoked bacon": "копченый бекон",
+      "leeks": "лук",
+      "orecchiette": "паста",
+      "Parmesan cheese": "пармезан",
+      "oil-packed sun-dried tomatoes": "вяленые помидоры в масле",
+      "fresh rosemary": "свежий розмарин",
+      "boneless, skinless chicken breasts": "куриная грудка без костей и кожи",
+      "cans diced tomatoes": "консервированные помидоры, нарезанные кубиками",
+      "spinach": "шпинат",
+      "Italian bread": "итальянский хлеб",
+      "Coarse salt": "Крупная соль",
+      "ground pepper": "молотый перец",
+      "chicken cutlets": "куриная грудка",
+      "reduced-fat mayonnaise": "майонез с пониженным содержанием жира",
+      "anchovy fillets": "филе анчоуса",
+      "pepitas": "семена тыквы",
+      "red wine vinegar": "красный винный уксус",
+      "jalapeño pepper": "перец халапеньо",
+      "Cotija": "сыр Котиха",
+      "vine tomato": "помидор",
+      "Kalamata olive": "Оливковое масло Каламата",
+      "dried oregano": "сушеный орегано",
+      "feta cheese": "сыр фета",
+      "granulated sugar": "сахарный песок",
+      "light brown sugar": "светло-коричневый сахар",
+      "black peppercorns": "черный перец горошком",
+      "salmon": "лосось",
+      "apple cider vinegar": "яблочный уксус",
+      "mustard": "горчица",
+      "honey": "мед",
+      "canola oil": "рапсовое масло",
+      "baby greens": "молодая зелень",
+      "white onion": "белый лук",
+      "dried cherries": "сушеные вишни",
+      "hazelnuts": "фундук",
+      "Butter": "Сливочное масло",
+      "Mushrooms": "Грибы",
+      "Onion": "Лук",
+      "All-purpose Flour": "мука",
+      "Chicken Broth": "Куриный бульон",
+      "Salt": "Соль",
+      "whole milk": "Цельное молоко",
+      "heavy cream": "Жырные сливки",
+      "butter": "Сливочное масло",
+      "eggs": "Яйца",
+      "parmesan": "Пармезан",
+      "pasta": "Паста",
+      "salt": "Соль",
+      "pepper": "Перец",
+      "red pepper flakes": "Хлопья красного перца",
+      "linguine": "Лингвини(разновидность пасты)",
+      "Carbs": "Углеводы",
+      "Protein": "Белки",
+      "Fat": "Жиры",
+      "g": "грамм",
+      "olive oil": "Оливковое масло",
+      "shallots": "Лук",
+      "garlic": "Чеснок",
+      "dry white wine": "Белое сухое вино",
+      "cherry tomatoes": "Помидоры черри",
+      "cooked shrimp": "Креветки",
+      "cilantro": "Кинза",
+      "walnuts": "Грецкие орехи",
+      "duck": "Утка",
+      "ghee": "Гхи(масло)",
+      "rocket": "Рукола",
+      "duck fat": "Утиный жир",
+      "chicken breasts": "Куриная грудка",
+      "seasoning": "Приправа",
+      "tomatoes": "Помидоры",
+      "chicken": "Цыплёнок",
+      "cream": "Сливки",
+      "lemon": "Лимон",
+      "parsley": "Петрушка",
+      "chicken thigh": "Куриное бедро",
+      "light mayonnaise": "Соус цезарь",
+      "Worcestershire sauce": "Вустерширский соус",
+      "Parmesan": "Пармезан",
+      "croûton": "Гренки",
+      "lettuce": "Салат-латук",
+      "cooking spray": "Оливковое масло",
+      "salad dressing": "Заправка для салата",
+      "shrimp": "Креветки",
+      "romaine lettuce": "Листья салата ромэн",
+      "croutons": "Гренки",
+      "parmesan cheese": "Пармезан",
+      "black pepper": "Черный перец",
+      "cucumber": "Огурец",
+      "red onion": "Красный лук",
+      "feta": "Сыр фета",
+      "Kalamata olives": "Оливки",
+      "shallot": "Лук шалот",
+      "lemon juice": "Лимонный сок",
+      "caraway seeds": "Семена тмина",
+      "English hothouse cucumber": "Огурец",
+      "watercress": "Кресс-салат",
+      "Granny Smith apple": "Яблоко",
+      "smoked salmon": "Копченный лосось",
+      "beef": "Говядина",
+      "vegetable oil": "Растительное масло",
+      "onion": "Лук",
+      "beet": "Свекла",
+      "carrots": "Морковь",
+      "tomato paste": "Томатная паста",
+      "bay leaves": "Лавровый лист",
+      "cabbage": "Капуста",
+      "potatoes": "Картошка",
+      "extra virgin olive oil": "Оливковое масло",
+      "button) mushrooms": "Шампиньоны",
+      "shiitake mushrooms": "Грибы шиитаке",
+      "kosher salt": "Соль",
+      "dried tarragon": "Cушеный эстрагон",
+      "chicken stock": "Куриный бульон",
+      "Fresh Dill": "Свежий укроп",
+      "Heavy Cream": "Жырные сливки",
+      "Salmon": "Лосось",
+      "Potatoes": "Картофель",
+      "Carrot": "Морковь",
+      "Fish Stock": "Рыбный бульон",
+      "Leek": "Лук",
+      "Unsalted Butter": "Сливочное масло",
+      "Pepper": "Перец",
+      "Cilantro": "Кинза",
+      "Lime juice": "Лаймовый сок",
+      "Kaffir lime leaves": "Листья кафрского лайма",
+      "Fish sauce": "Рыбный соус",
+      "Green chilis": "Зеленый перец чили",
+      "Tomato": "Помидоры",
+      "Straw mushrooms": "Соломенные грибы",
+      "slices Ginger": "Лимтики имбиря",
+      "Lemongrass": "Зеленый лук",
+      "Shallot": "Лук",
+      "Garlic": "Чеснок",
+      "Chicken Stock": "Куриный бульон",
+      "Shrimp": "Креветки",
+      "sugar pumpkin": "Тыква",
+      "unsalted butter": "Сливочное масло",
+      "ground cinnamon": "Молотая корица",
+      "ground nutmeg": "Молотый мускатный орех",
+      "cayenne pepper": "Кайенский перец",
+      "maple syrup": "Кленовый сироп",
+      "Kosher salt": "Соль",
+    };
+    function translateToRussian(ingredient) {
+      return translationDictionary[ingredient] || ingredient;
+    }
+    {% comment %} Функция для генерации информации для карточек через api {% endcomment %}
+    async function getRecipe(query,index,imageindex,imgContainer,ingredientsList,Protein_Fat_Carbs_list,weight,Calories_weight,image) {
+      const APP_ID = '5c5286a6';
+      const APP_KEY = 'fe9032c17912677483845fb44157fb87';
+      const urlSearch = `https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`;
+      try {
+        const response = await fetch(urlSearch);
+        if (!response.ok) {
+          throw new Error(`Ошибка HTTP: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(data)
+
+        const urlimage = data.hits[imageindex].recipe.image;
+        image.src = urlimage;
+        image.alt = 'Картинка карбонары';
+        imgContainer.src = urlimage;
+        imgContainer.style.borderRadius = '10px';
+        imgContainer.alt = 'Картинка карбонары';
+        let li_c = document.createElement('li')
+        let li_f = document.createElement('li')
+        let li_p = document.createElement('li')
+        let carbs = data.hits[index].recipe.totalNutrients.CHOCDF
+        let fats = data.hits[index].recipe.totalNutrients.FAT
+        let proteins = data.hits[index].recipe.totalNutrients.PROCNT
+        li_p.textContent = `${translateToRussian(carbs.label)}:${Math.round((carbs.quantity/data.hits[index].recipe.totalWeight)*100)} ${translateToRussian(carbs.unit)}`
+        li_f.textContent = `${translateToRussian(fats.label)}:${Math.round((fats.quantity/data.hits[index].recipe.totalWeight)*100)} ${translateToRussian(fats.unit)}`
+        li_c.textContent = `${translateToRussian(proteins.label)}:${Math.round((proteins.quantity/data.hits[index].recipe.totalWeight)*100)} ${translateToRussian(proteins.unit)}`
+        Protein_Fat_Carbs_list.appendChild(li_c)
+        Protein_Fat_Carbs_list.appendChild(li_f)
+        Protein_Fat_Carbs_list.appendChild(li_p)
+        let li_calories = document.createElement('li');
+        li_calories.textContent = `${'Калории'}:${Math.floor((data.hits[index].recipe.calories/data.hits[index].recipe.totalWeight)*100)} ${'ккал на 100 грамм'}`
+        let li_weight = document.createElement('li');
+        li_weight.textContent = `Вес блюда: ${parseInt(weight)} грамм`;
+        Calories_weight.appendChild(li_calories)
+        Calories_weight.appendChild(li_weight)
+        for (let i = 0; i < data.hits[index].recipe.ingredients.length; i++) {
+          let ingredient = data.hits[index].recipe.ingredients[i].food;
+          let translatedIngredient = translateToRussian(ingredient); // Используем функцию перевода
+          let li = document.createElement('li');
+          li.textContent = translatedIngredient;
+          ingredientsList.appendChild(li);
+        }
+        return data.hits;
+      } catch (error) {
+        console.error("Ошибка при запросе данных:", error);
+      }
+    }
+    document.addEventListener('DOMContentLoaded', async function(){
+      // Переменные для пасты карбонара
+      const spisok_pasta_carbonara = document.getElementById('spisok_pasta_carbonara');
+      const image_container_pasta_carbonara = document.getElementById('image_container_pasta_carbonara');
+      const Protein_Fat_Carbs_pasta_carbonara = document.getElementById('Protein_Fat_Carbs_pasta_carbonara');
+      const Calories_weight_pasta_carbonara = document.getElementById('Calories_weight_pasta_carbonara');
+      const image_pasta_carbonara = document.getElementById('image_pasta_carbonara');
+      // Переменные для пасты с креветками
+      const spisok_pasta_shrimp = document.getElementById('spisok_pasta_shrimp');
+      const image_container_pasta_shrimp = document.getElementById('image_container_pasta_shrimp');
+      const Protein_Fat_Carbs_pasta_shrimp = document.getElementById('Protein_Fat_Carbs_pasta_shrimp');
+      const Calories_weight_pasta_shrimp = document.getElementById('Calories_weight_pasta_shrimp');
+      const image_pasta_shrimp = document.getElementById('image_pasta_shrimp');
+      // Переменные для пасты с уткой
+      const spisok_pasta_duck = document.getElementById('spisok_pasta_duck');
+      const image_container_pasta_duck = document.getElementById('image_container_pasta_duck');
+      const Protein_Fat_Carbs_pasta_duck = document.getElementById('Protein_Fat_Carbs_pasta_duck');
+      const Calories_weight_pasta_duck = document.getElementById('Calories_weight_pasta_duck');
+      const image_pasta_duck = document.getElementById('image_pasta_duck');
+      // Переменные для пасты с циплёнком
+      const spisok_pasta_chicken = document.getElementById('spisok_pasta_chicken');
+      const image_container_pasta_chicken = document.getElementById('image_container_pasta_chicken');
+      const Protein_Fat_Carbs_pasta_chicken = document.getElementById('Protein_Fat_Carbs_pasta_chicken');
+      const Calories_weight_pasta_chicken = document.getElementById('Calories_weight_pasta_chicken');
+      const image_pasta_chicken = document.getElementById('image_pasta_chicken');
+      // Переменные для салата цезарь
+      const spisok_salad_caesar = document.getElementById('spisok_salad_caesar');
+      const image_container_salad_caesar = document.getElementById('image_container_salad_caesar');
+      const Protein_Fat_Carbs_salad_caesar = document.getElementById('Protein_Fat_Carbs_salad_caesar');
+      const Calories_weight_salad_caesar = document.getElementById('Calories_weight_salad_caesar');
+      const image_salad_caesar = document.getElementById('image_salad_caesar');
+      // Переменные для цезаря с креветками
+      const spisok_caesar_shrimp = document.getElementById('spisok_caesar_shrimp');
+      const image_container_caesar_shrimp = document.getElementById('image_container_caesar_shrimp');
+      const Protein_Fat_Carbs_caesar_shrimp = document.getElementById('Protein_Fat_Carbs_caesar_shrimp');
+      const Calories_weight_caesar_shrimp = document.getElementById('Calories_weight_caesar_shrimp');
+      const image_caesar_shrimp = document.getElementById('image_caesar_shrimp');
+      // Переменные для греческого салата
+      const spisok_greek_salad = document.getElementById('spisok_greek_salad');
+      const image_container_greek_salad = document.getElementById('image_container_greek_salad');
+      const Protein_Fat_Carbs_greek_salad = document.getElementById('Protein_Fat_Carbs_greek_salad');
+      const Calories_weight_greek_salad = document.getElementById('Calories_weight_greek_salad');
+      const image_greek_salad = document.getElementById('image_greek_salad');
+      // Переменные для салата с лососем и яблоком
+      const spisok_salad_salmon = document.getElementById('spisok_salad_salmon');
+      const image_container_salad_salmon = document.getElementById('image_container_salad_salmon');
+      const Protein_Fat_Carbs_salad_salmon = document.getElementById('Protein_Fat_Carbs_salad_salmon');
+      const Calories_weight_salad_salmon = document.getElementById('Calories_weight_salad_salmon');
+      const image_salad_salmon = document.getElementById('image_salad_salmon');
+      // Переменные для борща с говядиной
+      const spisok_borsch_beef = document.getElementById('spisok_borsch_beef');
+      const image_container_borsch_beef = document.getElementById('image_container_borsch_beef');
+      const Protein_Fat_Carbs_borsch_beef = document.getElementById('Protein_Fat_Carbs_borsch_beef');
+      const Calories_weight_borsch_beef = document.getElementById('Calories_weight_borsch_beef');
+      const image_borsch_beef = document.getElementById('image_borsch_beef');
+      // Переменные для грибного крем супа
+      const spisok_mushroom_cream_sup = document.getElementById('spisok_mushroom_cream_sup');
+      const image_container_mushroom_cream_sup = document.getElementById('image_container_mushroom_cream_sup');
+      const Protein_Fat_Carbs_mushroom_cream_sup = document.getElementById('Protein_Fat_Carbs_mushroom_cream_sup');
+      const Calories_weight_mushroom_cream_sup = document.getElementById('Calories_weight_mushroom_cream_sup');
+      const image_mushroom_cream_sup = document.getElementById('image_mushroom_cream_sup');
+      // Переменные для супа Лохикейло
+      const spisok_lohikeitto_sup = document.getElementById('spisok_lohikeitto_sup');
+      const image_container_lohikeitto_sup = document.getElementById('image_container_lohikeitto_sup');
+      const Protein_Fat_Carbs_lohikeitto_sup = document.getElementById('Protein_Fat_Carbs_lohikeitto_sup');
+      const Calories_weight_lohikeitto_sup = document.getElementById('Calories_weight_lohikeitto_sup');
+      const image_lohikeitto_sup = document.getElementById('image_lohikeitto_sup');
+      // Переменные для супа Том ям
+      const spisok_tom_yam_sup = document.getElementById('spisok_tom_yam_sup');
+      const image_container_tom_yam_sup = document.getElementById('image_container_tom_yam_sup');
+      const Protein_Fat_Carbs_tom_yam_sup = document.getElementById('Protein_Fat_Carbs_tom_yam_sup');
+      const Calories_weight_tom_yam_sup = document.getElementById('Calories_weight_tom_yam_sup');
+      const image_tom_yam_sup = document.getElementById('image_tom_yam_sup');
+      // Переменные для тыквенного супа
+      const spisok_pumpkin_cream_soup = document.getElementById('spisok_pumpkin_cream_soup');
+      const image_container_pumpkin_cream_soup = document.getElementById('image_container_pumpkin_cream_soup');
+      const Protein_Fat_Carbs_pumpkin_cream_soup = document.getElementById('Protein_Fat_Carbs_pumpkin_cream_soup');
+      const Calories_weight_pumpkin_cream_soup = document.getElementById('Calories_weight_pumpkin_cream_soup');
+      const image_pumpkin_cream_soup = document.getElementById('image_pumpkin_cream_soup');
+      try{
+        await Promise.all([
+        {% comment %} Вызов для всех паст {% endcomment %}
+        getRecipe('Carbonara',2,1,image_container_pasta_carbonara,spisok_pasta_carbonara,Protein_Fat_Carbs_pasta_carbonara,360,Calories_weight_pasta_carbonara,image_pasta_carbonara),
+        getRecipe('Shrimp pasta',0,2,image_container_pasta_shrimp,spisok_pasta_shrimp,Protein_Fat_Carbs_pasta_shrimp,315,Calories_weight_pasta_shrimp,image_pasta_shrimp),
+        getRecipe('Pasta with duck',0,0,image_container_pasta_duck,spisok_pasta_duck,Protein_Fat_Carbs_pasta_duck,355,Calories_weight_pasta_duck,image_pasta_duck),
+        getRecipe('Chicken pasta',9,3,image_container_pasta_chicken,spisok_pasta_chicken,Protein_Fat_Carbs_pasta_chicken,365,Calories_weight_pasta_chicken,image_pasta_chicken),
+        {% comment %} Вызов для салатов {% endcomment %}
+        getRecipe('Caesar salad chicken',7,7,image_container_salad_caesar,spisok_salad_caesar,Protein_Fat_Carbs_salad_caesar,280,Calories_weight_salad_caesar,image_salad_caesar),
+        getRecipe('Caesar shrimp salad',3,1,image_container_caesar_shrimp,spisok_caesar_shrimp,Protein_Fat_Carbs_caesar_shrimp,285,Calories_weight_caesar_shrimp,image_caesar_shrimp),
+        getRecipe('Greek salad',0,5,image_container_greek_salad,spisok_greek_salad,Protein_Fat_Carbs_greek_salad,255,Calories_weight_greek_salad,image_greek_salad),
+        getRecipe('Salad salmon and apple',3,3,image_container_salad_salmon,spisok_salad_salmon,Protein_Fat_Carbs_salad_salmon,275,Calories_weight_salad_salmon,image_salad_salmon),
+        {% comment %} Вызов для супов {% endcomment %}
+        getRecipe('Borsch beef',2,2,image_container_borsch_beef,spisok_borsch_beef,Protein_Fat_Carbs_borsch_beef,475,Calories_weight_borsch_beef, image_borsch_beef),
+        getRecipe('Mushroom cream soup',3,3,image_container_mushroom_cream_sup,spisok_mushroom_cream_sup,Protein_Fat_Carbs_mushroom_cream_sup,330,Calories_weight_mushroom_cream_sup, image_mushroom_cream_sup),
+        getRecipe('Lohikeitto',0,0,image_container_lohikeitto_sup,spisok_lohikeitto_sup,Protein_Fat_Carbs_lohikeitto_sup,400,Calories_weight_lohikeitto_sup, image_lohikeitto_sup),
+        getRecipe('Tom yam soup',3,3,image_container_tom_yam_sup,spisok_tom_yam_sup,Protein_Fat_Carbs_tom_yam_sup,400,Calories_weight_tom_yam_sup, image_tom_yam_sup),
+        getRecipe('Pumpkin cream soup',0,1,image_container_pumpkin_cream_soup,spisok_pumpkin_cream_soup,Protein_Fat_Carbs_pumpkin_cream_soup,350,Calories_weight_pumpkin_cream_soup, image_pumpkin_cream_soup),
+        ]);
+      }catch(error){
+        console.error("Ошибка при загрузке рецептов:", error)
+      }
+    })
+    </script>
+  </body>
+</html>
